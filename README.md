@@ -6,7 +6,7 @@ A clean, fully static HTML page that consolidates the most essential technical i
 
 ## 🌐 Live Preview
 
-Open `InterviewPlaybook.html` directly in any browser. No server or build step required.
+Website: https://akapande-dev.github.io/InterviewPlaybook/
 
 ---
 
