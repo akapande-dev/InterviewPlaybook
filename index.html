@@ -617,8 +617,1177 @@
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
     </a>
   </div>
-
 </div>
+
+<!-- ============================================================
+     30-DAY PLAN SECTION
+     Paste this block into InterviewPlaybook.html
+     ============================================================ -->
+
+<style>
+  /* ── PLAN SECTION ── */
+  .plan-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+  }
+  .plan-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .plan-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.3rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent2);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .plan-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 0.75rem;
+  }
+  .plan-header p {
+    color: var(--text-dim);
+    font-size: 1rem;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* ── LEGEND ── */
+  .plan-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .plan-progress-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.1rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .progress-bar-outer {
+    flex: 1;
+    min-width: 180px;
+    background: var(--surface2);
+    border-radius: 100px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .progress-bar-inner {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, #4f8ef7, #a78bfa);
+    transition: width 0.5s ease;
+  }
+  .progress-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  .progress-text strong { color: var(--text); }
+  .btn-reset {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .btn-reset:hover { color: #f87171; border-color: #f87171; }
+
+  /* ── START PROMPT ── */
+  .start-prompt {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .start-prompt::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(167,139,250,0.1), transparent 65%);
+    pointer-events: none;
+  }
+  .start-prompt-icon { font-size: 3rem; line-height: 1; }
+  .start-prompt h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .start-prompt p { color: var(--text-dim); font-size: 0.95rem; max-width: 400px; }
+  .start-prompt .today-pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.6rem 1.25rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent2);
+  }
+  .btn-start {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #4f8ef7, #a78bfa);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.85rem 2rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    letter-spacing: -0.2px;
+  }
+  .btn-start:hover { opacity: 0.9; transform: translateY(-2px); }
+
+  /* ── CALENDAR GRID ── */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  /* ── DAY CELL ── */
+  .day-cell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.85rem 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s, opacity 0.2s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-height: 100px;
+  }
+  .day-cell:hover:not(.day-future) { transform: translateY(-2px); border-color: var(--cell-color, var(--accent)); }
+  .day-cell.day-future { opacity: 0.45; cursor: default; pointer-events: none; }
+  .day-cell.day-today { box-shadow: 0 0 0 2px gold; border-color: gold; }
+  .day-cell.day-missed { border-color: rgba(248,113,113,0.4); background: rgba(248,113,113,0.04); }
+  .day-cell.day-done {
+    border-color: var(--cell-color, var(--accent));
+    box-shadow: 0 0 0 1px var(--cell-color, var(--accent)), 0 0 16px -4px var(--cell-color, var(--accent));
+  }
+  .day-cell.day-selected { border-color: var(--cell-color, var(--accent)); background: var(--surface2); }
+  .day-cell.day-weekend { background: color-mix(in srgb, var(--surface) 85%, var(--cell-color, var(--accent)) 15%); }
+
+  .cell-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cell-day-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .cell-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+  }
+  .cell-today-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+    background: gold;
+    color: #000;
+    border-radius: 4px;
+    padding: 0.1rem 0.35rem;
+    letter-spacing: 0.05em;
+  }
+  .cell-weekend-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--cell-color, var(--accent));
+    opacity: 0.8;
+  }
+  .cell-topic-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--cell-color, var(--accent));
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .cell-task {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    line-height: 1.35;
+    flex-grow: 1;
+  }
+  .cell-tick {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.7rem;
+    font-size: 0.85rem;
+    color: var(--cell-color, var(--accent));
+    filter: drop-shadow(0 0 6px var(--cell-color, var(--accent)));
+  }
+  .cell-missed-icon {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.7rem;
+    font-size: 0.8rem;
+    color: #f87171;
+  }
+  .cell-score-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--cell-color, var(--accent));
+    margin-top: 0.15rem;
+  }
+
+  /* ── DETAIL PANEL ── */
+  .detail-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+    display: none;
+    animation: slideDown 0.2s ease;
+  }
+  .detail-panel.visible { display: block; }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .detail-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+  .detail-title-block { flex: 1; min-width: 0; }
+  .detail-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--detail-color, var(--accent));
+    margin-bottom: 0.35rem;
+  }
+  .detail-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  .detail-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.4rem;
+  }
+  .detail-meta span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .detail-subtopics {
+    margin-bottom: 1.25rem;
+  }
+  .detail-subtopics h4 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .detail-subtopics ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .detail-subtopics li {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  .detail-subtopics li::before {
+    content: '›';
+    color: var(--detail-color, var(--accent));
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .detail-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+  .btn-complete {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: none;
+    border-radius: 10px;
+    padding: 0.65rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-complete:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-complete.mark-done { background: var(--detail-color, var(--accent)); color: #fff; }
+  .btn-complete.mark-undo { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); }
+  .btn-resource {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--detail-color, var(--accent));
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .btn-resource:hover { gap: 0.6rem; }
+  .btn-mock {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--surface2);
+    border: 1px solid var(--detail-color, var(--accent));
+    color: var(--detail-color, var(--accent));
+    border-radius: 10px;
+    padding: 0.65rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-left: auto;
+  }
+  .btn-mock:hover { background: color-mix(in srgb, var(--detail-color, var(--accent)) 12%, transparent); transform: translateY(-1px); }
+  .btn-mock:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+  .mock-score-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+
+  /* ── MOCK TEST MODAL ── */
+  .mock-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .mock-overlay.open { opacity: 1; pointer-events: all; }
+  .mock-modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 640px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transform: translateY(20px);
+    transition: transform 0.25s;
+  }
+  .mock-overlay.open .mock-modal { transform: translateY(0); }
+  .mock-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .mock-modal-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .mock-progress-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .btn-close-mock {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-close-mock:hover { color: var(--text); border-color: var(--text-dim); }
+  .mock-q-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .mock-question {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .mock-code {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .mock-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .mock-option {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .mock-option:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
+  .mock-option.correct { border-color: #34d399; background: rgba(52,211,153,0.08); color: #34d399; }
+  .mock-option.wrong   { border-color: #f87171; background: rgba(248,113,113,0.08); color: #f87171; }
+  .mock-option:disabled { cursor: default; }
+  .mock-feedback {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+    display: none;
+    border-left: 3px solid var(--feedback-color, var(--accent));
+  }
+  .mock-feedback.show { display: block; }
+  .mock-feedback strong { color: var(--text); display: block; margin-bottom: 0.3rem; font-size: 0.82rem; }
+  .btn-next-q {
+    align-self: flex-end;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.65rem 1.4rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    display: none;
+  }
+  .btn-next-q.show { display: inline-flex; }
+  .btn-next-q:hover { opacity: 0.85; }
+
+  /* ── SCORE SUMMARY ── */
+  .score-summary {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  .score-big {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .score-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .score-verdict {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    padding: 0.3rem 1rem;
+    border-radius: 100px;
+    border: 1px solid;
+  }
+  .btn-close-score {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 0.65rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-close-score:hover { background: var(--border); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    .plan-section { padding: 3rem 1.25rem 4rem; }
+    .calendar-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+    .day-cell { min-height: 88px; padding: 0.7rem; }
+    .cell-task { font-size: 0.68rem; }
+    .mock-modal { padding: 1.5rem; }
+    .detail-actions { gap: 0.5rem; }
+    .btn-mock { margin-left: 0; }
+  }
+  @media (max-width: 400px) {
+    .calendar-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<!-- ── 30-DAY PLAN SECTION ── -->
+<section style="border-top: 1px solid var(--border);">
+  <div class="plan-section" id="plan">
+
+    <!-- Header -->
+    <div class="plan-header">
+      <div class="plan-eyebrow">📅 30-Day Plan</div>
+      <h2>Your Personal <span style="background: linear-gradient(135deg,#a78bfa,#4f8ef7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Prep Calendar</span></h2>
+      <p>A day-by-day roadmap tailored to 1–2 hrs on weekdays and 3 hrs on weekends. Click any day to see what to study and take a mock test.</p>
+    </div>
+
+    <!-- Legend -->
+    <div class="plan-legend">
+      <div class="legend-item"><span class="legend-dot" style="background:#34d399"></span> DSA</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#fb923c"></span> JavaScript</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#4f8ef7"></span> React</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#a78bfa"></span> System Design</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#f472b6"></span> Claude Code</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#fbbf24"></span> Revision</div>
+      <div class="legend-item"><span class="legend-dot" style="background:gold; outline: 2px solid gold; outline-offset:1px; border-radius:3px;"></span> Today</div>
+      <div class="legend-item"><span class="legend-dot" style="background:rgba(248,113,113,0.4)"></span> Missed</div>
+    </div>
+
+    <!-- Start prompt OR calendar -->
+    <div id="planStartPrompt" class="start-prompt" style="display:none;">
+      <div class="start-prompt-icon">🗓️</div>
+      <h3>Ready to start your journey?</h3>
+      <p>Your 30-day plan will be personalised from today. Every day you open this, your progress stays exactly where you left it.</p>
+      <div class="today-pill" id="todayPill">Loading date…</div>
+      <button class="btn-start" onclick="planBegin()">
+        🚀 Begin 30-Day Plan
+      </button>
+    </div>
+
+    <!-- Progress bar (hidden until started) -->
+    <div class="plan-progress-wrap" id="planProgressWrap" style="display:none;">
+      <div class="progress-bar-outer">
+        <div class="progress-bar-inner" id="planProgressBar" style="width:0%"></div>
+      </div>
+      <div class="progress-text" id="planProgressText"><strong>0</strong> / 30 days · Est. finish: —</div>
+      <button class="btn-reset" onclick="planReset()">↺ Reset</button>
+    </div>
+
+    <!-- Calendar grid -->
+    <div class="calendar-grid" id="planCalendar" style="display:none;"></div>
+
+    <!-- Detail panel -->
+    <div class="detail-panel" id="planDetailPanel"></div>
+
+  </div>
+</section>
+
+<!-- ── MOCK TEST MODAL ── -->
+<div class="mock-overlay" id="mockOverlay">
+  <div class="mock-modal" id="mockModal">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<script>
+(function() {
+  /* ─────────────────────────────────────────────
+     DATA — 30-day curriculum
+  ───────────────────────────────────────────── */
+  const TOPICS = {
+    dsa:    { label: 'DSA',          icon: '🧩', color: '#34d399', resource: 'https://takeuforward.org/dsa/strivers-79-last-moment-dsa-sheet-ace-interviews', resourceLabel: 'Open Striver\'s Sheet' },
+    js:     { label: 'JavaScript',   icon: '⚡', color: '#fb923c', resource: 'PDFs/javascript-questions.pdf', resourceLabel: 'Open JS PDF' },
+    react:  { label: 'React',        icon: '⚛️', color: '#4f8ef7', resource: 'https://www.greatfrontend.com/blog/100-react-interview-questions-straight-from-ex-interviewers', resourceLabel: 'Open React Questions' },
+    sd:     { label: 'System Design',icon: '🏗️', color: '#a78bfa', resource: 'https://www.geeksforgeeks.org/system-design/complete-roadmap-to-learn-system-design/', resourceLabel: 'Open Roadmap' },
+    claude: { label: 'Claude Code',  icon: '🤖', color: '#f472b6', resource: 'https://institute.sfeir.com/en/claude-code/claude-code-resources/interview/', resourceLabel: 'Open Claude Q&A' },
+    rev:    { label: 'Revision',     icon: '🔁', color: '#fbbf24', resource: null, resourceLabel: null },
+  };
+
+  const DAYS = [
+    { topic:'dsa',    task:'Arrays & Strings — basics',         time:'1–2 hrs', subtopics:['Two-pointer technique','Sliding window basics','String reversal & anagrams','Prefix sums'] },
+    { topic:'dsa',    task:'Arrays & Strings — medium',         time:'1–2 hrs', subtopics:['Kadane\'s algorithm (max subarray)','Dutch national flag problem','Rotate matrix','Merge intervals'] },
+    { topic:'dsa',    task:'Arrays & Strings — patterns',       time:'1–2 hrs', subtopics:['Next permutation','Set matrix zeroes','Pascal\'s triangle','Stock buy/sell problems'] },
+    { topic:'dsa',    task:'Arrays continued + wrap-up',        time:'1–2 hrs', subtopics:['Trapping rainwater','3Sum / 4Sum','Longest common prefix','Product of array except self'] },
+    { topic:'dsa',    task:'Recursion & Backtracking',          time:'3 hrs',   subtopics:['Subsets & power set','Permutations','N-Queens problem','Sudoku solver approach'] },
+    { topic:'dsa',    task:'Binary Search',                     time:'3 hrs',   subtopics:['Classic binary search','Search in rotated array','Find peak element','Kth element in sorted arrays'] },
+    { topic:'dsa',    task:'Sorting algorithms',                time:'1–2 hrs', subtopics:['Merge sort & quick sort','Counting sort','Sort colors','Largest number from array'] },
+    { topic:'dsa',    task:'Linked Lists — basics',             time:'1–2 hrs', subtopics:['Reverse linked list','Detect cycle (Floyd\'s)','Merge two sorted lists','Find middle node'] },
+    { topic:'dsa',    task:'Linked Lists — advanced',           time:'1–2 hrs', subtopics:['LRU Cache','Clone list with random pointer','Flatten a multilevel list','Remove Nth from end'] },
+    { topic:'dsa',    task:'Trees — traversals & basics',       time:'1–2 hrs', subtopics:['Inorder / Preorder / Postorder','Level order traversal','Height & diameter','Symmetric tree'] },
+    { topic:'dsa',    task:'Trees — advanced problems',         time:'3 hrs',   subtopics:['Lowest common ancestor','Binary tree to DLL','Construct tree from traversals','Serialize/deserialize'] },
+    { topic:'dsa',    task:'Graphs — BFS & DFS',                time:'3 hrs',   subtopics:['BFS shortest path','DFS connected components','Number of islands','Flood fill'] },
+    { topic:'dsa',    task:'Graphs — advanced',                 time:'1–2 hrs', subtopics:['Topological sort (Kahn\'s)','Detect cycle in directed graph','Dijkstra\'s algorithm','Bipartite check'] },
+    { topic:'dsa',    task:'Dynamic Programming — intro',       time:'1–2 hrs', subtopics:['Climbing stairs / Fibonacci','0/1 Knapsack','Coin change','Longest common subsequence'] },
+    { topic:'js',     task:'Core JS — scope & closures',        time:'1–2 hrs', subtopics:['var / let / const differences','Closure definition & examples','Hoisting behaviour','IIFE pattern'] },
+    { topic:'js',     task:'Core JS — functions & this',        time:'1–2 hrs', subtopics:['Arrow functions vs regular functions','call / apply / bind','this keyword in different contexts','Currying & partial application'] },
+    { topic:'js',     task:'Core JS — types & coercion',        time:'1–2 hrs', subtopics:['Type coercion rules','== vs ===','typeof and instanceof','Nullish coalescing & optional chaining'] },
+    { topic:'js',     task:'Async JS — promises & event loop',  time:'3 hrs',   subtopics:['Call stack & event loop visualised','Promise chaining','Promise.all / race / allSettled','Microtasks vs macrotasks'] },
+    { topic:'js',     task:'Async JS — async/await',            time:'3 hrs',   subtopics:['async/await syntax','Error handling with try/catch','Parallel vs sequential async','Real-world fetch patterns'] },
+    { topic:'js',     task:'Advanced JS — prototypes & OOP',    time:'1–2 hrs', subtopics:['Prototype chain','Object.create','ES6 classes & inheritance','Mixins pattern'] },
+    { topic:'js',     task:'Advanced JS — DOM & events',        time:'1–2 hrs', subtopics:['Event delegation','Debounce & throttle','MutationObserver','localStorage vs sessionStorage'] },
+    { topic:'react',  task:'Hooks — useState & useEffect',      time:'1–2 hrs', subtopics:['State batching in React 18','useEffect cleanup','Dependency array gotchas','Avoiding stale closures'] },
+    { topic:'react',  task:'Hooks — useCallback & useMemo',     time:'1–2 hrs', subtopics:['When memoization actually helps','Reference equality','React.memo with hooks','Avoiding premature optimisation'] },
+    { topic:'react',  task:'Hooks — useRef & custom hooks',     time:'3 hrs',   subtopics:['useRef vs useState','Forwarding refs','Building useFetch','Building useDebounce'] },
+    { topic:'react',  task:'State management & Context',        time:'3 hrs',   subtopics:['Context API patterns','useReducer for complex state','When to use external state libs','Prop drilling solutions'] },
+    { topic:'react',  task:'Component architecture',            time:'1–2 hrs', subtopics:['Compound components','Render props pattern','HOC pattern','Controlled vs uncontrolled inputs'] },
+    { topic:'react',  task:'Performance & reconciliation',      time:'1–2 hrs', subtopics:['Virtual DOM & diffing','Code splitting with lazy()','Suspense boundaries','Profiler API'] },
+    { topic:'sd',     task:'System Design — core concepts',     time:'3 hrs',   subtopics:['Load balancing strategies','Caching layers (Redis, CDN)','SQL vs NoSQL trade-offs','CAP theorem explained','Rate limiting algorithms','Horizontal vs vertical scaling'] },
+    { topic:'claude', task:'Claude Code — all 27 Q&As',         time:'3 hrs',   subtopics:['Junior: install, CLI basics, slash commands','Mid: CLAUDE.md, permissions, Git integration','Senior: CI/CD, MCP, monorepo, enterprise security','File structure: CLAUDE.md hierarchy'] },
+    { topic:'rev',    task:'Final Mock + Weak Area Revision',   time:'1–2 hrs', subtopics:['Revisit your lowest mock scores','One timed mock interview session','Consolidate notes per topic','Review any skipped days'] },
+  ];
+
+  /* ─────────────────────────────────────────────
+     MOCK QUESTIONS BANK
+  ───────────────────────────────────────────── */
+  const QUESTIONS = {
+    dsa: [
+      { q:'What is the time complexity of binary search on a sorted array of n elements?', options:['O(n)','O(log n)','O(n log n)','O(1)'], ans:1, explanation:'Binary search halves the search space each iteration, giving O(log n) time complexity.' },
+      { q:'Which data structure is used in BFS traversal?', options:['Stack','Queue','Heap','Graph'], ans:1, explanation:'BFS uses a Queue (FIFO) to explore nodes level by level.' },
+      { q:'What does Kadane\'s algorithm solve?', options:['Shortest path','Maximum subarray sum','Longest common subsequence','Cycle detection'], ans:1, explanation:'Kadane\'s algorithm finds the contiguous subarray with the largest sum in O(n) time.' },
+      { q:'What is the space complexity of merge sort?', options:['O(1)','O(log n)','O(n)','O(n²)'], ans:2, explanation:'Merge sort requires O(n) auxiliary space for the temporary arrays during merging.' },
+      { q:'Floyd\'s cycle detection algorithm uses how many pointers?', options:['1','2','3','4'], ans:1, explanation:'Floyd\'s algorithm uses a slow pointer (1 step) and a fast pointer (2 steps) — two pointers total.' },
+      { q:'What is the time complexity of inserting into a hash table on average?', options:['O(n)','O(log n)','O(1)','O(n log n)'], ans:2, explanation:'Hash table insertion is O(1) average case due to direct index computation via the hash function.' },
+      { q:'Which algorithm is best for finding the shortest path in an unweighted graph?', options:['DFS','Dijkstra','BFS','Bellman-Ford'], ans:2, explanation:'BFS guarantees shortest path in unweighted graphs since it explores level by level.' },
+      { q:'What is topological sort used for?', options:['Finding cycles in undirected graphs','Ordering tasks with dependencies','Shortest path in weighted graphs','Balancing a BST'], ans:1, explanation:'Topological sort linearly orders vertices in a DAG such that for every edge u→v, u comes before v.' },
+      { q:'In the 0/1 Knapsack problem, each item can be:', options:['Taken fractionally','Taken multiple times','Taken once or not at all','Ignored always'], ans:2, explanation:'In 0/1 Knapsack, each item is either fully included (1) or excluded (0) — no fractions.' },
+      { q:'What does the two-pointer technique primarily help with?', options:['Tree traversal','Reducing O(n²) to O(n) on sorted arrays','Graph connectivity','Dynamic programming'], ans:1, explanation:'Two pointers reduce nested loops on sorted arrays/strings, often bringing O(n²) down to O(n).' },
+    ],
+    js: [
+      { q:'What does the following output?\n\nconsole.log(typeof null);', options:['"null"','"object"','"undefined"','"boolean"'], ans:1, explanation:'"typeof null" returning "object" is a well-known JavaScript bug preserved for backwards compatibility.' },
+      { q:'Which of these creates a closure?', options:['A function that returns a primitive','A function that references a variable from its outer scope','A function with no parameters','An immediately invoked function with no return'], ans:1, explanation:'A closure occurs when a function retains access to its lexical scope even after the outer function has returned.' },
+      { q:'What is the event loop\'s job in JavaScript?', options:['Execute async code in parallel threads','Move callbacks from the task queue to the call stack when the stack is empty','Parse and compile JS code','Manage memory allocation'], ans:1, explanation:'The event loop continuously checks if the call stack is empty and moves queued callbacks onto it for execution.' },
+      { q:'What does Promise.all() do when one promise rejects?', options:['Waits for all to complete','Rejects immediately with that error','Returns the resolved values ignoring the rejection','Retries the rejected promise'], ans:1, explanation:'Promise.all() short-circuits and rejects as soon as any one promise in the array rejects.' },
+      { q:'What is the output?\n\nconst a = [1,2,3];\nconst b = a;\nb.push(4);\nconsole.log(a.length);', options:['3','4','undefined','Error'], ans:1, explanation:'Arrays are reference types. b and a point to the same array, so pushing to b also modifies a.' },
+      { q:'Which method stops an event from propagating to parent elements?', options:['event.preventDefault()','event.stopPropagation()','event.stop()','event.cancel()'], ans:1, explanation:'stopPropagation() prevents the event from bubbling up to ancestor elements.' },
+      { q:'What does "hoisting" mean in JavaScript?', options:['Moving code to the bottom of the file','Declarations being moved to the top of their scope at parse time','Executing async code first','Optimising loops at runtime'], ans:1, explanation:'Hoisting moves variable and function declarations to the top of their scope before code execution.' },
+      { q:'What is the difference between == and ===?', options:['No difference','== checks value and type, === only value','=== checks value and type, == only value after coercion','=== is slower'], ans:2, explanation:'=== is strict equality (no coercion). == performs type coercion before comparison.' },
+      { q:'What does debouncing do?', options:['Calls a function immediately on every event','Delays a function call until after a pause in events','Calls a function at most once per interval','Removes duplicate function calls'], ans:1, explanation:'Debounce waits until events stop firing for a set delay before executing the function — useful for search inputs.' },
+      { q:'What is the prototype chain?', options:['A list of all functions in a module','The mechanism by which objects inherit properties from other objects','A design pattern for async code','A type of linked list in JS'], ans:1, explanation:'The prototype chain allows objects to inherit properties/methods from their prototype, enabling JavaScript\'s inheritance model.' },
+    ],
+    react: [
+      { q:'What triggers a re-render in a React functional component?', options:['Any variable change','State or prop change','Only setState calls','setTimeout callbacks'], ans:1, explanation:'React re-renders a component when its state changes (via useState/useReducer) or when parent passes new props.' },
+      { q:'What is the purpose of the useCallback hook?', options:['Memoize a computed value','Memoize a function reference to prevent recreation on every render','Fetch data on mount','Replace useState for complex state'], ans:1, explanation:'useCallback memoizes a function reference so child components receiving it as a prop don\'t re-render unnecessarily.' },
+      { q:'When does useEffect run with an empty dependency array []?', options:['On every render','Only on mount','On every state change','Never'], ans:1, explanation:'An empty dependency array means the effect runs once after the initial render — equivalent to componentDidMount.' },
+      { q:'What does React.memo do?', options:['Memoizes state','Prevents re-render if props haven\'t changed','Caches API responses','Replaces useMemo'], ans:1, explanation:'React.memo is a HOC that shallowly compares props and skips re-rendering if they haven\'t changed.' },
+      { q:'What is a controlled component?', options:['A component with no props','A component whose form input value is managed by React state','A component that controls its children\'s state','A memoized component'], ans:1, explanation:'In a controlled component, form data is handled by React state (value + onChange), not the DOM.' },
+      { q:'What does the key prop do in a list?', options:['Styles list items','Helps React identify which items changed, added, or removed','Makes items draggable','Sets ARIA labels'], ans:1, explanation:'The key prop gives React a stable identity for each list item, enabling efficient reconciliation.' },
+      { q:'What is the Context API used for?', options:['Fetching API data','Passing data through the component tree without props drilling','Managing side effects','Handling errors'], ans:1, explanation:'Context provides a way to share values (theme, auth, locale) globally without passing props at every level.' },
+      { q:'What does useRef return?', options:['A state variable','A mutable object with a .current property that persists across renders','A cached function','A DOM event'], ans:1, explanation:'useRef returns { current: initialValue } — mutating .current doesn\'t trigger a re-render, unlike useState.' },
+      { q:'What is code splitting in React?', options:['Splitting CSS files','Breaking the app into smaller chunks loaded on demand','Dividing state across components','Splitting API calls'], ans:1, explanation:'Code splitting (via React.lazy + dynamic import) defers loading parts of the app until they\'re needed, reducing initial bundle size.' },
+      { q:'What is the reconciliation process?', options:['Merging two state objects','React\'s algorithm for diffing the virtual DOM to determine minimal real DOM updates','Converting JSX to HTML','Resolving promise chains'], ans:1, explanation:'Reconciliation is how React compares the new virtual DOM tree with the previous one and applies only the necessary real DOM changes.' },
+    ],
+    sd: [
+      { q:'What does horizontal scaling mean?', options:['Upgrading a single server\'s CPU/RAM','Adding more servers to distribute load','Increasing database storage','Partitioning data across tables'], ans:1, explanation:'Horizontal scaling (scale-out) adds more machines; vertical scaling (scale-up) adds resources to existing machines.' },
+      { q:'What problem does a CDN primarily solve?', options:['Database bottlenecks','High latency for geographically distributed users','API rate limiting','Memory leaks'], ans:1, explanation:'CDNs cache static content at edge locations closer to users, reducing latency and origin server load.' },
+      { q:'In CAP theorem, what does "P" stand for?', options:['Performance','Partition Tolerance','Persistence','Pub-Sub'], ans:1, explanation:'CAP theorem states a distributed system can guarantee at most two of: Consistency, Availability, Partition Tolerance.' },
+      { q:'What is the main advantage of a message queue (e.g., Kafka)?', options:['Faster SQL queries','Decoupling producers and consumers for async processing','Replacing load balancers','Eliminating the need for caching'], ans:1, explanation:'Message queues decouple services, allow async processing, enable rate control, and provide durability for events.' },
+      { q:'What is database sharding?', options:['Replicating data across read replicas','Partitioning data horizontally across multiple databases','Encrypting database columns','Indexing every column'], ans:1, explanation:'Sharding splits a large dataset into smaller partitions (shards) stored on separate database instances to enable horizontal scaling.' },
+    ],
+    claude: [
+      { q:'What is CLAUDE.md used for in a Claude Code project?', options:['Storing API keys','Providing project-specific instructions and context to Claude','Defining CI/CD pipelines','Managing npm dependencies'], ans:1, explanation:'CLAUDE.md files store persistent project context — coding conventions, architecture notes, team standards — that Claude reads automatically.' },
+      { q:'Which slash command compresses context while keeping a summary?', options:['/clear','/help','/compact','/reset'], ans:2, explanation:'/compact summarises and compresses the conversation context to free up space while retaining essential information.' },
+      { q:'What does the -p flag enable in Claude Code?', options:['Private mode','Non-interactive (headless) mode for scripting and CI','Premium model access','Parallel task execution'], ans:1, explanation:'The -p flag runs Claude Code non-interactively, passing a prompt directly — ideal for CI/CD pipelines and automation scripts.' },
+      { q:'Where should team-wide permissions be configured in Claude Code?', options:['CLAUDE.md','package.json','.claude/settings.json','~/.bashrc'], ans:2, explanation:'.claude/settings.json at the repo root stores shared tool permissions that apply consistently across the whole team.' },
+      { q:'What is MCP in the context of Claude Code?', options:['Model Control Protocol','Model Context Protocol — a standard for connecting Claude to external tools and data sources','Memory Cache Protocol','Multi-Claude Processing'], ans:1, explanation:'MCP (Model Context Protocol) is Anthropic\'s open standard that lets Claude connect to databases, APIs, and tools via a plugin-like system.' },
+      { q:'Which CLAUDE.md file takes highest priority?', options:['The one in the project root','The one in the src/ folder','The one in ~/.claude/','The one in .claude/'], ans:2, explanation:'CLAUDE.md files are hierarchical. User-level (~/.claude/CLAUDE.md) sets global defaults; repo-level and folder-level files add or override context for specific scopes.' },
+      { q:'What happens when Claude Code hits the 200k token context limit?', options:['It crashes','It automatically starts a new session','It prompts you to use /compact or /clear','It deletes old files'], ans:2, explanation:'Claude Code warns you and recommends /compact (compress with summary) or /clear (full reset) to manage the context window.' },
+      { q:'How does Claude Code integrate with Git?', options:['It has no Git integration','It can stage, commit, diff, and create branches via bash tool access','It replaces Git entirely','It only reads .gitignore'], ans:1, explanation:'Claude Code can run any Git command through its bash tool access — diffing changes, staging files, writing commit messages, and managing branches.' },
+      { q:'What is the Task tool in Claude Code used for?', options:['Managing TODO comments','Spawning subagents to run parallel or sequential sub-tasks','Creating GitHub issues','Scheduling cron jobs'], ans:1, explanation:'The Task tool lets Claude spin up subagents to handle complex workflows with multiple independent or sequential steps.' },
+      { q:'What is the recommended way to handle sensitive data in Claude Code enterprise setups?', options:['Store secrets in CLAUDE.md','Use environment variables and never put secrets in CLAUDE.md or settings.json','Hardcode in the source','Store in .claude/ folder'], ans:1, explanation:'Secrets should live in environment variables or a secrets manager. CLAUDE.md and settings.json are committed to version control and must never contain credentials.' },
+    ],
+    rev: [
+      { q:'Which Big-O complexity is considered efficient enough for most interview problems with n ≤ 10⁶?', options:['O(n²)','O(n log n) or better','O(2ⁿ)','O(n!)'], ans:1, explanation:'O(n log n) or better (O(n), O(log n)) is generally acceptable for large inputs. O(n²) starts failing around n = 10⁴–10⁵.' },
+      { q:'What is the first thing you should do when given a system design question?', options:['Draw the architecture immediately','Clarify requirements and estimate scale','Write code','Choose a database'], ans:1, explanation:'Always clarify functional requirements, non-functional requirements (scale, latency, availability), and constraints before designing anything.' },
+      { q:'What React hook would you use to avoid a child component re-rendering when its parent re-renders?', options:['useState','useRef','React.memo + useCallback','useEffect'], ans:2, explanation:'React.memo prevents re-render when props haven\'t changed; useCallback memoizes the function props passed down so their reference stays stable.' },
+      { q:'In JavaScript, what is the output of: [1,2,3].map(parseInt)?', options:['[1,2,3]','[1,NaN,NaN]','[1,1,1]','Error'], ans:1, explanation:'map passes (value, index) to parseInt. parseInt("2", 1) and parseInt("3", 2) return NaN because base 1 is invalid and "3" isn\'t valid in base 2.' },
+      { q:'What does the CAP theorem say a distributed system must sacrifice during a network partition?', options:['Performance','Either Consistency or Availability','Security','Durability'], ans:1, explanation:'During a network partition, a distributed system must choose between remaining consistent (returning errors) or remaining available (returning potentially stale data).' },
+      { q:'Which Claude Code file stores folder-specific instructions closest to the code?', options:['~/.claude/CLAUDE.md','Root CLAUDE.md','.claude/CLAUDE.md','A CLAUDE.md inside the relevant subfolder'], ans:3, explanation:'A CLAUDE.md placed inside a specific subfolder (e.g. src/) gives Claude context scoped to just that folder and its children.' },
+      { q:'What is event delegation in JavaScript?', options:['Delegating async events to a worker','Attaching one listener to a parent to handle events from many children','Removing event listeners automatically','Using CustomEvent for component communication'], ans:1, explanation:'Event delegation leverages event bubbling — attach one listener to a parent and check event.target to handle events from many child elements efficiently.' },
+      { q:'When should you use useReducer over useState?', options:['Always','When state logic involves multiple sub-values or complex transitions','Only in class components','When you need to fetch data'], ans:1, explanation:'useReducer shines with complex state that has multiple related fields or transitions that depend on previous state — centralises update logic.' },
+      { q:'What does topological sort require about the input graph?', options:['It must be weighted','It must be a DAG (Directed Acyclic Graph)','It must be undirected','It must be fully connected'], ans:1, explanation:'Topological sort only works on Directed Acyclic Graphs. A cycle makes a linear ordering impossible.' },
+      { q:'In React, what is "prop drilling" and how is it typically solved?', options:['A performance bug; solved by useMemo','Passing props through many layers unnecessarily; solved by Context API or state management libraries','A memory leak; solved by cleanup in useEffect','A re-render issue; solved by React.memo'], ans:1, explanation:'Prop drilling is passing data through many intermediate components that don\'t use it. Context API, Redux, or Zustand are common solutions.' },
+      { q:'What HTTP status code indicates a rate limit has been exceeded?', options:['400','401','403','429'], ans:3, explanation:'429 Too Many Requests is the standard status code for rate limiting. 401 = unauthenticated, 403 = forbidden, 400 = bad request.' },
+      { q:'What is the Virtual DOM in React?', options:['A server-side rendering technique','An in-memory representation of the real DOM used for efficient diffing','A CSS-in-JS solution','A database for component state'], ans:1, explanation:'The Virtual DOM is a lightweight JavaScript object tree mirroring the real DOM. React diffs old vs new virtual DOM and applies minimal real DOM changes.' },
+      { q:'What does Big-O O(1) space complexity mean?', options:['The algorithm uses one variable','The algorithm\'s memory usage doesn\'t grow with input size','The algorithm runs in constant time','The algorithm uses no memory'], ans:1, explanation:'O(1) space means the algorithm uses a fixed amount of memory regardless of input size — like an in-place sort using only a few pointer variables.' },
+      { q:'What is a race condition in async JavaScript?', options:['When two setTimeout calls run at the same time','When multiple async operations complete in an unpredictable order causing incorrect results','When a Promise rejects unexpectedly','When the event loop is blocked'], ans:1, explanation:'A race condition occurs when the result depends on the timing of async operations — e.g., two fetches updating the same state where the second may overwrite the first.' },
+      { q:'Which system design pattern helps prevent a slow service from taking down the whole system?', options:['Singleton pattern','Circuit breaker pattern','Factory pattern','Observer pattern'], ans:1, explanation:'The circuit breaker pattern detects failures and short-circuits calls to a struggling service, preventing cascading failures across the system.' },
+      { q:'What is the difference between localStorage and sessionStorage?', options:['No difference','localStorage persists after browser close; sessionStorage clears when the tab closes','sessionStorage has more capacity','localStorage is encrypted'], ans:1, explanation:'localStorage data persists indefinitely until explicitly cleared. sessionStorage is scoped to the browser tab and is cleared when the tab closes.' },
+      { q:'What does the spread operator (...) do when used with arrays?', options:['Converts an array to a string','Creates a shallow copy or merges arrays','Sorts the array','Removes duplicates'], ans:1, explanation:'The spread operator expands an iterable\'s elements — useful for shallow copying arrays ([...a]) or merging ([...a, ...b]).' },
+      { q:'In system design, what does "eventual consistency" mean?', options:['Data is always up to date','Replicas will converge to the same value given enough time without new updates','Transactions are atomic','Queries always return consistent results'], ans:1, explanation:'Eventual consistency (used by systems like DynamoDB, Cassandra) means replicas may temporarily differ but will sync to the same state eventually.' },
+      { q:'What is the purpose of the useMemo hook?', options:['Memoize a callback function','Cache the result of an expensive computation between renders','Persist state across sessions','Fetch data once on mount'], ans:1, explanation:'useMemo caches the return value of a function between renders, recomputing only when its dependencies change — useful for expensive calculations.' },
+      { q:'Which of these is NOT a valid HTTP method?', options:['GET','POST','FETCH','DELETE'], ans:2, explanation:'FETCH is not an HTTP method — it\'s the name of the JavaScript browser API. Standard methods include GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD.' },
+    ],
+  };
+
+  /* ─────────────────────────────────────────────
+     STORAGE
+  ───────────────────────────────────────────── */
+  const LS_START    = 'interviewPlaybook_startDate';
+  const LS_PROGRESS = 'interviewPlaybook_progress';
+  const LS_SCORES   = 'interviewPlaybook_testScores';
+
+  function loadProgress() {
+    try { return JSON.parse(localStorage.getItem(LS_PROGRESS) || '{}'); } catch(e) { return {}; }
+  }
+  function saveProgress(p) { localStorage.setItem(LS_PROGRESS, JSON.stringify(p)); }
+  function loadScores() {
+    try { return JSON.parse(localStorage.getItem(LS_SCORES) || '{}'); } catch(e) { return {}; }
+  }
+  function saveScores(s) { localStorage.setItem(LS_SCORES, JSON.stringify(s)); }
+  function getStartDate() { return localStorage.getItem(LS_START) || null; }
+  function setStartDate(d) { localStorage.setItem(LS_START, d); }
+
+  /* ─────────────────────────────────────────────
+     DATE HELPERS
+  ───────────────────────────────────────────── */
+  function toYMD(d) {
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function fromYMD(s) {
+    const [y,m,d] = s.split('-').map(Number);
+    return new Date(y, m-1, d);
+  }
+  function addDays(d, n) {
+    const r = new Date(d); r.setDate(r.getDate() + n); return r;
+  }
+  function isWeekend(d) { return d.getDay() === 0 || d.getDay() === 6; }
+  function formatDate(d) {
+    return d.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+  }
+  function todayYMD() { return toYMD(new Date()); }
+
+  /* ─────────────────────────────────────────────
+     INIT
+  ───────────────────────────────────────────── */
+  const elPrompt    = document.getElementById('planStartPrompt');
+  const elProgressW = document.getElementById('planProgressWrap');
+  const elCalendar  = document.getElementById('planCalendar');
+  const elDetail    = document.getElementById('planDetailPanel');
+  const elPill      = document.getElementById('todayPill');
+
+  let selectedDay = null;
+
+  function init() {
+    const today = new Date();
+    if (elPill) elPill.textContent = today.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+
+    const start = getStartDate();
+    if (!start) {
+      elPrompt.style.display = 'flex';
+    } else {
+      elPrompt.style.display = 'none';
+      renderCalendar(start);
+    }
+  }
+
+  window.planBegin = function() {
+    const today = todayYMD();
+    setStartDate(today);
+    elPrompt.style.display = 'none';
+    renderCalendar(today);
+  };
+
+  window.planReset = function() {
+    if (!confirm('Reset all progress? This cannot be undone.')) return;
+    localStorage.removeItem(LS_START);
+    localStorage.removeItem(LS_PROGRESS);
+    localStorage.removeItem(LS_SCORES);
+    elCalendar.style.display = 'none';
+    elProgressW.style.display = 'none';
+    elDetail.classList.remove('visible');
+    selectedDay = null;
+    elPrompt.style.display = 'flex';
+  };
+
+  /* ─────────────────────────────────────────────
+     RENDER CALENDAR
+  ───────────────────────────────────────────── */
+  function renderCalendar(startYMD) {
+    const progress = loadProgress();
+    const scores   = loadScores();
+    const startD   = fromYMD(startYMD);
+    const todayStr = todayYMD();
+
+    elCalendar.innerHTML = '';
+    elCalendar.style.display = 'grid';
+    elProgressW.style.display = 'flex';
+
+    let doneCount = 0;
+
+    for (let i = 0; i < 30; i++) {
+      const dayNum  = i + 1;
+      const dayDate = addDays(startD, i);
+      const dayStr  = toYMD(dayDate);
+      const data    = DAYS[i];
+      const topic   = TOPICS[data.topic];
+      const done    = !!progress[dayNum];
+      const isToday = dayStr === todayStr;
+      const isFuture= dayStr > todayStr;
+      const isMissed= !done && dayStr < todayStr;
+      const weekend  = isWeekend(dayDate);
+      const score    = scores[dayNum];
+
+      if (done) doneCount++;
+
+      const cell = document.createElement('div');
+      cell.className = 'day-cell' +
+        (done    ? ' day-done'   : '') +
+        (isToday ? ' day-today'  : '') +
+        (isFuture? ' day-future' : '') +
+        (isMissed? ' day-missed' : '') +
+        (weekend  ? ' day-weekend': '') +
+        (selectedDay === dayNum ? ' day-selected' : '');
+      cell.style.setProperty('--cell-color', topic.color);
+      cell.dataset.day = dayNum;
+
+      cell.innerHTML = `
+        <div class="cell-top">
+          <span class="cell-day-num">Day ${dayNum}</span>
+          ${isToday ? '<span class="cell-today-badge">TODAY</span>' : `<span class="cell-date">${formatDate(dayDate)}</span>`}
+        </div>
+        ${weekend ? '<span class="cell-weekend-badge">⚡ Weekend</span>' : ''}
+        <span class="cell-topic-tag">${topic.icon} ${topic.label}</span>
+        <span class="cell-task">${data.task}</span>
+        ${score !== undefined ? `<span class="cell-score-badge">Test: ${score}/${getQCount(data.topic)}</span>` : ''}
+        ${done    ? '<span class="cell-tick">✓</span>'   : ''}
+        ${isMissed? '<span class="cell-missed-icon">!</span>' : ''}
+      `;
+
+      if (!isFuture) {
+        cell.addEventListener('click', () => openDetail(dayNum, startYMD));
+      }
+
+      elCalendar.appendChild(cell);
+    }
+
+    updateProgress(doneCount, startYMD);
+  }
+
+  function getQCount(topicKey) {
+    if (topicKey === 'rev') return QUESTIONS.rev.length;
+    return (QUESTIONS[topicKey] || []).length;
+  }
+
+  function updateProgress(doneCount, startYMD) {
+    const pct = Math.round((doneCount / 30) * 100);
+    document.getElementById('planProgressBar').style.width = pct + '%';
+    const finishDate = addDays(fromYMD(startYMD), 29);
+    document.getElementById('planProgressText').innerHTML =
+      `<strong>${doneCount}</strong> / 30 days completed · Est. finish: ${formatDate(finishDate)}`;
+  }
+
+  /* ─────────────────────────────────────────────
+     DETAIL PANEL
+  ───────────────────────────────────────────── */
+  function openDetail(dayNum, startYMD) {
+    selectedDay = dayNum;
+    const data     = DAYS[dayNum - 1];
+    const topic    = TOPICS[data.topic];
+    const progress = loadProgress();
+    const scores   = loadScores();
+    const done     = !!progress[dayNum];
+    const score    = scores[dayNum];
+    const dayDate  = formatDate(addDays(fromYMD(startYMD), dayNum - 1));
+    const qCount   = getQCount(data.topic);
+    const questions= QUESTIONS[data.topic] || [];
+
+    elDetail.style.setProperty('--detail-color', topic.color);
+
+    const subtopicItems = data.subtopics.map(s => `<li>${s}</li>`).join('');
+    const resourceLink  = topic.resource
+      ? `<a class="btn-resource" href="${topic.resource}" target="_blank" rel="noopener">
+           ${topic.resourceLabel} <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+         </a>`
+      : '';
+    const mockDisabled  = !done || questions.length === 0;
+    const scoreText     = score !== undefined ? `<span class="mock-score-display">Last score: ${score}/${qCount}</span>` : '';
+
+    elDetail.innerHTML = `
+      <div class="detail-top">
+        <div class="detail-title-block">
+          <div class="detail-eyebrow">${topic.icon} ${topic.label} · Day ${dayNum}</div>
+          <div class="detail-title">${data.task}</div>
+          <div class="detail-meta">
+            <span>📅 ${dayDate}</span>
+            <span>⏱ ${data.time}</span>
+            ${isWeekend(addDays(fromYMD(startYMD), dayNum - 1)) ? '<span>⚡ Weekend session</span>' : ''}
+          </div>
+        </div>
+      </div>
+      <div class="detail-subtopics">
+        <h4>What to cover today</h4>
+        <ul>${subtopicItems}</ul>
+      </div>
+      <div class="detail-actions">
+        <button class="btn-complete ${done ? 'mark-undo' : 'mark-done'}"
+          onclick="toggleComplete(${dayNum}, '${startYMD}')"
+          style="${done ? '' : `background:${topic.color};`}">
+          ${done ? '↩ Mark Incomplete' : '✓ Mark Complete'}
+        </button>
+        ${resourceLink}
+        ${scoreText}
+        <button class="btn-mock" ${mockDisabled ? 'disabled' : ''} onclick="openMock(${dayNum})"
+          title="${mockDisabled ? 'Mark this day complete first' : 'Take mock test'}">
+          🧪 ${score !== undefined ? 'Retake' : 'Take'} Mock Test ${mockDisabled ? '🔒' : ''}
+        </button>
+      </div>
+    `;
+
+    elDetail.classList.add('visible');
+    elDetail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    // Highlight selected cell
+    document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('day-selected'));
+    const cellEl = document.querySelector(`.day-cell[data-day="${dayNum}"]`);
+    if (cellEl) cellEl.classList.add('day-selected');
+  }
+
+  window.toggleComplete = function(dayNum, startYMD) {
+    const progress = loadProgress();
+    if (progress[dayNum]) { delete progress[dayNum]; }
+    else { progress[dayNum] = true; }
+    saveProgress(progress);
+    renderCalendar(startYMD);
+    openDetail(dayNum, startYMD);
+  };
+
+  /* ─────────────────────────────────────────────
+     MOCK TEST ENGINE
+  ───────────────────────────────────────────── */
+  let mockState = { dayNum: null, questions: [], current: 0, score: 0, answered: false };
+
+  window.openMock = function(dayNum) {
+    const data      = DAYS[dayNum - 1];
+    const topicKey  = data.topic;
+    const qs        = (QUESTIONS[topicKey] || []).slice();
+    // Shuffle
+    for (let i = qs.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [qs[i], qs[j]] = [qs[j], qs[i]];
+    }
+    mockState = { dayNum, questions: qs, current: 0, score: 0, answered: false, topicKey };
+    renderMockQuestion();
+    document.getElementById('mockOverlay').classList.add('open');
+  };
+
+  function renderMockQuestion() {
+    const { questions, current, score } = mockState;
+    const total = questions.length;
+    const modal = document.getElementById('mockModal');
+
+    if (current >= total) {
+      // Save score
+      const scores = loadScores();
+      scores[mockState.dayNum] = score;
+      saveScores(scores);
+      // Re-render calendar + detail
+      const startYMD = getStartDate();
+      if (startYMD) {
+        renderCalendar(startYMD);
+        openDetail(mockState.dayNum, startYMD);
+      }
+      // Show summary
+      const pct = Math.round((score / total) * 100);
+      let verdict, verdictColor;
+      if      (pct >= 80) { verdict = '🏆 Excellent!';   verdictColor = '#34d399'; }
+      else if (pct >= 60) { verdict = '👍 Good work';    verdictColor = '#4f8ef7'; }
+      else if (pct >= 40) { verdict = '📚 Keep studying'; verdictColor = '#fb923c'; }
+      else                { verdict = '💪 Review needed'; verdictColor = '#f87171'; }
+
+      modal.innerHTML = `
+        <div class="mock-modal-header">
+          <div class="mock-modal-title">Mock Test Complete</div>
+          <button class="btn-close-mock" onclick="closeMock()">✕</button>
+        </div>
+        <div class="score-summary">
+          <div class="score-big" style="color:${verdictColor}">${score}<span style="font-size:1.5rem;color:var(--text-muted)">/${total}</span></div>
+          <div class="score-label">${pct}% correct</div>
+          <div class="score-verdict" style="color:${verdictColor}; border-color:${verdictColor}; background:${verdictColor}22">${verdict}</div>
+          <p style="font-size:0.85rem;color:var(--text-muted);max-width:320px;text-align:center;">Score saved. You can retake anytime from the day's detail panel.</p>
+          <button class="btn-close-score" onclick="closeMock()">Close</button>
+        </div>
+      `;
+      return;
+    }
+
+    const q = questions[current];
+    const topicColor = TOPICS[mockState.topicKey]?.color || 'var(--accent)';
+    const optionsHTML = q.options.map((opt, i) =>
+      `<button class="mock-option" data-idx="${i}" onclick="answerMock(${i})">${opt}</button>`
+    ).join('');
+
+    const hasCode = q.q.includes('\n');
+    const [questionText, ...codeLines] = q.q.split('\n');
+
+    modal.innerHTML = `
+      <div class="mock-modal-header">
+        <div class="mock-modal-title" style="color:${topicColor}">
+          ${TOPICS[mockState.topicKey]?.icon} ${TOPICS[mockState.topicKey]?.label} Mock Test
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="mock-progress-text">${score}/${current} correct</span>
+          <button class="btn-close-mock" onclick="closeMock()">✕</button>
+        </div>
+      </div>
+      <div class="mock-q-num">Question ${current + 1} of ${total}</div>
+      <div class="mock-question">${questionText.trim()}</div>
+      ${hasCode ? `<div class="mock-code">${codeLines.join('\n').trim()}</div>` : ''}
+      <div class="mock-options">${optionsHTML}</div>
+      <div class="mock-feedback" id="mockFeedback"></div>
+      <button class="btn-next-q" id="btnNextQ" onclick="nextMockQ()">
+        ${current + 1 < total ? 'Next Question →' : 'See Results'}
+      </button>
+    `;
+    mockState.answered = false;
+  }
+
+  window.answerMock = function(idx) {
+    if (mockState.answered) return;
+    mockState.answered = true;
+
+    const q       = mockState.questions[mockState.current];
+    const correct = idx === q.ans;
+    if (correct) mockState.score++;
+
+    const buttons = document.querySelectorAll('.mock-option');
+    buttons.forEach(btn => {
+      btn.disabled = true;
+      const i = parseInt(btn.dataset.idx);
+      if (i === q.ans) btn.classList.add('correct');
+      else if (i === idx && !correct) btn.classList.add('wrong');
+    });
+
+    const fb = document.getElementById('mockFeedback');
+    fb.style.setProperty('--feedback-color', correct ? '#34d399' : '#f87171');
+    fb.innerHTML = `<strong>${correct ? '✓ Correct!' : '✗ Incorrect'}</strong>${q.explanation}`;
+    fb.classList.add('show');
+
+    const btn = document.getElementById('btnNextQ');
+    if (btn) btn.classList.add('show');
+  };
+
+  window.nextMockQ = function() {
+    mockState.current++;
+    renderMockQuestion();
+  };
+
+  window.closeMock = function() {
+    document.getElementById('mockOverlay').classList.remove('open');
+  };
+
+  // Close on backdrop click
+  document.getElementById('mockOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeMock();
+  });
+
+  /* ── BOOT ── */
+  init();
+})();
+</script>
 
 <!-- CREATOR -->
 <section class="creator-section" id="creator">
