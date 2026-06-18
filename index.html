@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InterviewPlaybook</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -258,7 +258,7 @@
     .c-orange { --card-accent: #fb923c; }
     .c-pink   { --card-accent: #f472b6; }
 
-    /* ── WIDE CARD (Claude Code) ── */
+    /* ── WIDE CARD ── */
     .card-wide {
       grid-column: 1 / -1;
     }
@@ -332,6 +332,668 @@
     .file-structure .dir { color: var(--accent); }
     .file-structure .file { color: var(--text-dim); }
     .file-structure .comment { color: var(--text-muted); }
+
+    /* ── PLAN SECTION ── */
+    .plan-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+    }
+    .plan-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .plan-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.3rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent2);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .plan-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 0.75rem;
+    }
+    .plan-header p {
+      color: var(--text-dim);
+      font-size: 1rem;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── LEGEND ── */
+    .plan-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ── PACE HINT ── */
+    .pace-hint {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.9rem 1.25rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .pace-hint-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .pace-hint-text {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .pace-hint-text strong { color: var(--text); }
+
+    /* ── PROGRESS BAR ── */
+    .plan-progress-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.1rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .progress-bar-outer {
+      flex: 1;
+      min-width: 180px;
+      background: var(--surface2);
+      border-radius: 100px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, #4f8ef7, #a78bfa);
+      transition: width 0.5s ease;
+    }
+    .progress-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .progress-text strong { color: var(--text); }
+    .btn-reset {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .btn-reset:hover { color: #f87171; border-color: #f87171; }
+
+    /* ── START PROMPT ── */
+    .start-prompt {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .start-prompt::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(167,139,250,0.1), transparent 65%);
+      pointer-events: none;
+    }
+    .start-prompt-icon { font-size: 3rem; line-height: 1; }
+    .start-prompt h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .start-prompt p { color: var(--text-dim); font-size: 0.95rem; max-width: 440px; }
+    .start-prompt .pace-list {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1.25rem;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      text-align: left;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      max-width: 340px;
+      width: 100%;
+    }
+    .start-prompt .pace-list li::before {
+      content: '→ ';
+      color: var(--accent2);
+      font-weight: 700;
+    }
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #4f8ef7, #a78bfa);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 0.85rem 2rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      letter-spacing: -0.2px;
+    }
+    .btn-start:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    /* ── CALENDAR GRID ── */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── DAY CELL ── */
+    .day-cell {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.85rem 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s, opacity 0.2s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-height: 100px;
+    }
+    .day-cell:hover:not(.day-locked) { transform: translateY(-2px); border-color: var(--cell-color, var(--accent)); }
+    .day-cell.day-locked {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+      filter: grayscale(0.5);
+    }
+    .day-cell.day-unlocked-next {
+      border-color: color-mix(in srgb, var(--cell-color, var(--accent)) 40%, transparent);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--cell-color, var(--accent)) 25%, transparent);
+    }
+    .day-cell.day-done {
+      border-color: var(--cell-color, var(--accent));
+      box-shadow: 0 0 0 1px var(--cell-color, var(--accent)), 0 0 16px -4px var(--cell-color, var(--accent));
+    }
+    .day-cell.day-selected { border-color: var(--cell-color, var(--accent)); background: var(--surface2); }
+    .day-cell.day-in-progress {
+      border-color: color-mix(in srgb, var(--cell-color, var(--accent)) 60%, transparent);
+    }
+
+    .cell-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cell-day-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .cell-status-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+      letter-spacing: 0.05em;
+    }
+    .badge-next {
+      background: color-mix(in srgb, var(--cell-color, var(--accent)) 20%, transparent);
+      color: var(--cell-color, var(--accent));
+      border: 1px solid color-mix(in srgb, var(--cell-color, var(--accent)) 40%, transparent);
+    }
+    .badge-locked {
+      background: rgba(100,116,139,0.15);
+      color: var(--text-muted);
+      border: 1px solid rgba(100,116,139,0.2);
+    }
+    .cell-topic-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cell-color, var(--accent));
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .cell-task {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      line-height: 1.35;
+      flex-grow: 1;
+    }
+    .cell-tick {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.7rem;
+      font-size: 0.85rem;
+      color: var(--cell-color, var(--accent));
+      filter: drop-shadow(0 0 6px var(--cell-color, var(--accent)));
+    }
+    .cell-lock-icon {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.7rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+    .cell-score-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--cell-color, var(--accent));
+      margin-top: 0.15rem;
+    }
+
+    /* ── DETAIL PANEL ── */
+    .detail-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+      display: none;
+      animation: slideDown 0.2s ease;
+    }
+    .detail-panel.visible { display: block; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .detail-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .detail-title-block { flex: 1; min-width: 0; }
+    .detail-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--detail-color, var(--accent));
+      margin-bottom: 0.35rem;
+    }
+    .detail-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+    .detail-meta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.4rem;
+    }
+    .detail-meta span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .detail-subtopics {
+      margin-bottom: 1.25rem;
+    }
+    .detail-subtopics h4 {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .detail-subtopics ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .detail-subtopics li {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+    .detail-subtopics li::before {
+      content: '›';
+      color: var(--detail-color, var(--accent));
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .detail-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .btn-complete {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: none;
+      border-radius: 10px;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-complete:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-complete.mark-done { background: var(--detail-color, var(--accent)); color: #fff; }
+    .btn-complete.mark-undo { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); }
+    .btn-resource {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--detail-color, var(--accent));
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .btn-resource:hover { gap: 0.6rem; }
+    .btn-mock {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--surface2);
+      border: 1px solid var(--detail-color, var(--accent));
+      color: var(--detail-color, var(--accent));
+      border-radius: 10px;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-left: auto;
+    }
+    .btn-mock:hover { background: color-mix(in srgb, var(--detail-color, var(--accent)) 12%, transparent); transform: translateY(-1px); }
+    .btn-mock:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+    .mock-score-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    /* ── NEXT DAY NUDGE ── */
+    .next-day-nudge {
+      background: color-mix(in srgb, var(--detail-color, var(--accent)) 8%, transparent);
+      border: 1px solid color-mix(in srgb, var(--detail-color, var(--accent)) 25%, transparent);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .next-day-nudge strong { color: var(--detail-color, var(--accent)); }
+    .btn-go-next {
+      margin-left: auto;
+      background: var(--detail-color, var(--accent));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .btn-go-next:hover { opacity: 0.85; }
+
+    /* ── MOCK TEST MODAL ── */
+    .mock-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .mock-overlay.open { opacity: 1; pointer-events: all; }
+    .mock-modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 640px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      transform: translateY(20px);
+      transition: transform 0.25s;
+    }
+    .mock-overlay.open .mock-modal { transform: translateY(0); }
+    .mock-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .mock-modal-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .mock-progress-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .btn-close-mock {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-close-mock:hover { color: var(--text); border-color: var(--text-dim); }
+    .mock-q-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    .mock-question {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .mock-code {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .mock-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .mock-option {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .mock-option:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
+    .mock-option.correct { border-color: #34d399; background: rgba(52,211,153,0.08); color: #34d399; }
+    .mock-option.wrong   { border-color: #f87171; background: rgba(248,113,113,0.08); color: #f87171; }
+    .mock-option:disabled { cursor: default; }
+    .mock-feedback {
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.55;
+      display: none;
+      border-left: 3px solid var(--feedback-color, var(--accent));
+    }
+    .mock-feedback.show { display: block; }
+    .mock-feedback strong { color: var(--text); display: block; margin-bottom: 0.3rem; font-size: 0.82rem; }
+    .btn-next-q {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      display: none;
+    }
+    .btn-next-q.show { display: inline-flex; }
+    .btn-next-q:hover { opacity: 0.85; }
+
+    /* ── SCORE SUMMARY ── */
+    .score-summary {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+    .score-big {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .score-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .score-verdict {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      padding: 0.3rem 1rem;
+      border-radius: 100px;
+      border: 1px solid;
+    }
+    .btn-close-score {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.65rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-close-score:hover { background: var(--border); }
 
     /* ── CREATOR SECTION ── */
     .creator-section {
@@ -436,6 +1098,16 @@
       .sections-grid { padding: 1.5rem 1.25rem 3rem; gap: 1rem; }
       .creator-card { padding: 2rem 1.5rem; }
       .claude-body { grid-template-columns: 1fr; }
+      .plan-section { padding: 3rem 1.25rem 4rem; }
+      .calendar-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+      .day-cell { min-height: 88px; padding: 0.7rem; }
+      .cell-task { font-size: 0.68rem; }
+      .mock-modal { padding: 1.5rem; }
+      .detail-actions { gap: 0.5rem; }
+      .btn-mock { margin-left: 0; }
+    }
+    @media (max-width: 400px) {
+      .calendar-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -460,7 +1132,7 @@
 <section class="hero">
   <div class="hero-eyebrow">
     <span class="dot"></span>
-    Interview Ready · 2025
+    Interview Ready · 2026
   </div>
   <h1>Your <span class="grad">Interview</span><br/>Playbook</h1>
   <p>Everything you need to crack your next technical interview — DSA, JavaScript, React, System Design, and Claude Code — in one place.</p>
@@ -619,630 +1291,15 @@
   </div>
 </div>
 
-<!-- ============================================================
-     30-DAY PLAN SECTION
-     Paste this block into InterviewPlaybook.html
-     ============================================================ -->
-
-<style>
-  /* ── PLAN SECTION ── */
-  .plan-section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 2rem 5rem;
-  }
-  .plan-header {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-  .plan-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 0.3rem 1rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--accent2);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-bottom: 1.25rem;
-  }
-  .plan-header h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 700;
-    letter-spacing: -1px;
-    margin-bottom: 0.75rem;
-  }
-  .plan-header p {
-    color: var(--text-dim);
-    font-size: 1rem;
-    max-width: 520px;
-    margin: 0 auto;
-  }
-
-  /* ── LEGEND ── */
-  .plan-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    justify-content: center;
-    margin-bottom: 2rem;
-  }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .legend-dot {
-    width: 10px; height: 10px;
-    border-radius: 3px;
-    flex-shrink: 0;
-  }
-
-  /* ── PROGRESS BAR ── */
-  .plan-progress-wrap {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1.1rem 1.5rem;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
-  }
-  .progress-bar-outer {
-    flex: 1;
-    min-width: 180px;
-    background: var(--surface2);
-    border-radius: 100px;
-    height: 8px;
-    overflow: hidden;
-  }
-  .progress-bar-inner {
-    height: 100%;
-    border-radius: 100px;
-    background: linear-gradient(90deg, #4f8ef7, #a78bfa);
-    transition: width 0.5s ease;
-  }
-  .progress-text {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--text-dim);
-    white-space: nowrap;
-  }
-  .progress-text strong { color: var(--text); }
-  .btn-reset {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    font-size: 0.72rem;
-    font-family: 'JetBrains Mono', monospace;
-    padding: 0.3rem 0.75rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: color 0.2s, border-color 0.2s;
-    white-space: nowrap;
-  }
-  .btn-reset:hover { color: #f87171; border-color: #f87171; }
-
-  /* ── START PROMPT ── */
-  .start-prompt {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 3.5rem 2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .start-prompt::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(167,139,250,0.1), transparent 65%);
-    pointer-events: none;
-  }
-  .start-prompt-icon { font-size: 3rem; line-height: 1; }
-  .start-prompt h3 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-  }
-  .start-prompt p { color: var(--text-dim); font-size: 0.95rem; max-width: 400px; }
-  .start-prompt .today-pill {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.6rem 1.25rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--accent2);
-  }
-  .btn-start {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: linear-gradient(135deg, #4f8ef7, #a78bfa);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 0.85rem 2rem;
-    font-size: 0.95rem;
-    font-weight: 700;
-    font-family: 'Space Grotesk', sans-serif;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.15s;
-    letter-spacing: -0.2px;
-  }
-  .btn-start:hover { opacity: 0.9; transform: translateY(-2px); }
-
-  /* ── CALENDAR GRID ── */
-  .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.75rem;
-    margin-bottom: 2rem;
-  }
-
-  /* ── DAY CELL ── */
-  .day-cell {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 0.85rem 0.9rem;
-    cursor: pointer;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s, opacity 0.2s;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    min-height: 100px;
-  }
-  .day-cell:hover:not(.day-future) { transform: translateY(-2px); border-color: var(--cell-color, var(--accent)); }
-  .day-cell.day-future { opacity: 0.45; cursor: default; pointer-events: none; }
-  .day-cell.day-today { box-shadow: 0 0 0 2px gold; border-color: gold; }
-  .day-cell.day-missed { border-color: rgba(248,113,113,0.4); background: rgba(248,113,113,0.04); }
-  .day-cell.day-done {
-    border-color: var(--cell-color, var(--accent));
-    box-shadow: 0 0 0 1px var(--cell-color, var(--accent)), 0 0 16px -4px var(--cell-color, var(--accent));
-  }
-  .day-cell.day-selected { border-color: var(--cell-color, var(--accent)); background: var(--surface2); }
-  .day-cell.day-weekend { background: color-mix(in srgb, var(--surface) 85%, var(--cell-color, var(--accent)) 15%); }
-
-  .cell-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .cell-day-num {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--text-muted);
-  }
-  .cell-date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--text-muted);
-  }
-  .cell-today-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.58rem;
-    font-weight: 700;
-    background: gold;
-    color: #000;
-    border-radius: 4px;
-    padding: 0.1rem 0.35rem;
-    letter-spacing: 0.05em;
-  }
-  .cell-weekend-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.58rem;
-    color: var(--cell-color, var(--accent));
-    opacity: 0.8;
-  }
-  .cell-topic-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.65rem;
-    font-weight: 700;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--cell-color, var(--accent));
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .cell-task {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    line-height: 1.35;
-    flex-grow: 1;
-  }
-  .cell-tick {
-    position: absolute;
-    top: 0.6rem;
-    right: 0.7rem;
-    font-size: 0.85rem;
-    color: var(--cell-color, var(--accent));
-    filter: drop-shadow(0 0 6px var(--cell-color, var(--accent)));
-  }
-  .cell-missed-icon {
-    position: absolute;
-    top: 0.6rem;
-    right: 0.7rem;
-    font-size: 0.8rem;
-    color: #f87171;
-  }
-  .cell-score-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--cell-color, var(--accent));
-    margin-top: 0.15rem;
-  }
-
-  /* ── DETAIL PANEL ── */
-  .detail-panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.75rem;
-    margin-bottom: 2rem;
-    display: none;
-    animation: slideDown 0.2s ease;
-  }
-  .detail-panel.visible { display: block; }
-  @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .detail-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.25rem;
-  }
-  .detail-title-block { flex: 1; min-width: 0; }
-  .detail-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--detail-color, var(--accent));
-    margin-bottom: 0.35rem;
-  }
-  .detail-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.3px;
-  }
-  .detail-meta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-top: 0.4rem;
-  }
-  .detail-meta span {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
-  .detail-subtopics {
-    margin-bottom: 1.25rem;
-  }
-  .detail-subtopics h4 {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    margin-bottom: 0.6rem;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .detail-subtopics ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-  .detail-subtopics li {
-    font-size: 0.875rem;
-    color: var(--text-dim);
-    display: flex;
-    gap: 0.5rem;
-    align-items: flex-start;
-  }
-  .detail-subtopics li::before {
-    content: '›';
-    color: var(--detail-color, var(--accent));
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-  .detail-actions {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-top: 1.25rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--border);
-  }
-  .btn-complete {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    border: none;
-    border-radius: 10px;
-    padding: 0.65rem 1.25rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    font-family: 'Space Grotesk', sans-serif;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.15s;
-  }
-  .btn-complete:hover { opacity: 0.85; transform: translateY(-1px); }
-  .btn-complete.mark-done { background: var(--detail-color, var(--accent)); color: #fff; }
-  .btn-complete.mark-undo { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); }
-  .btn-resource {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--detail-color, var(--accent));
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: gap 0.2s;
-  }
-  .btn-resource:hover { gap: 0.6rem; }
-  .btn-mock {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: var(--surface2);
-    border: 1px solid var(--detail-color, var(--accent));
-    color: var(--detail-color, var(--accent));
-    border-radius: 10px;
-    padding: 0.65rem 1.25rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    font-family: 'Space Grotesk', sans-serif;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    margin-left: auto;
-  }
-  .btn-mock:hover { background: color-mix(in srgb, var(--detail-color, var(--accent)) 12%, transparent); transform: translateY(-1px); }
-  .btn-mock:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
-  .mock-score-display {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    margin-left: auto;
-  }
-
-  /* ── MOCK TEST MODAL ── */
-  .mock-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(6px);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s;
-  }
-  .mock-overlay.open { opacity: 1; pointer-events: all; }
-  .mock-modal {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    width: 100%;
-    max-width: 640px;
-    max-height: 85vh;
-    overflow-y: auto;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    transform: translateY(20px);
-    transition: transform 0.25s;
-  }
-  .mock-overlay.open .mock-modal { transform: translateY(0); }
-  .mock-modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-  .mock-modal-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-  }
-  .mock-progress-text {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
-  .btn-close-mock {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .btn-close-mock:hover { color: var(--text); border-color: var(--text-dim); }
-  .mock-q-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-  }
-  .mock-question {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.5;
-  }
-  .mock-code {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.85rem 1rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--text-dim);
-    line-height: 1.7;
-    white-space: pre;
-    overflow-x: auto;
-  }
-  .mock-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-  .mock-option {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
-    font-size: 0.875rem;
-    color: var(--text-dim);
-    cursor: pointer;
-    text-align: left;
-    transition: border-color 0.15s, background 0.15s, color 0.15s;
-    font-family: 'Inter', sans-serif;
-  }
-  .mock-option:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
-  .mock-option.correct { border-color: #34d399; background: rgba(52,211,153,0.08); color: #34d399; }
-  .mock-option.wrong   { border-color: #f87171; background: rgba(248,113,113,0.08); color: #f87171; }
-  .mock-option:disabled { cursor: default; }
-  .mock-feedback {
-    background: var(--surface2);
-    border-radius: 10px;
-    padding: 0.9rem 1.1rem;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    line-height: 1.55;
-    display: none;
-    border-left: 3px solid var(--feedback-color, var(--accent));
-  }
-  .mock-feedback.show { display: block; }
-  .mock-feedback strong { color: var(--text); display: block; margin-bottom: 0.3rem; font-size: 0.82rem; }
-  .btn-next-q {
-    align-self: flex-end;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 0.65rem 1.4rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    font-family: 'Space Grotesk', sans-serif;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    display: none;
-  }
-  .btn-next-q.show { display: inline-flex; }
-  .btn-next-q:hover { opacity: 0.85; }
-
-  /* ── SCORE SUMMARY ── */
-  .score-summary {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 0;
-  }
-  .score-big {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1;
-  }
-  .score-label {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-  .score-verdict {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    padding: 0.3rem 1rem;
-    border-radius: 100px;
-    border: 1px solid;
-  }
-  .btn-close-score {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    border-radius: 10px;
-    padding: 0.65rem 1.5rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    font-family: 'Space Grotesk', sans-serif;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .btn-close-score:hover { background: var(--border); }
-
-  /* ── MOBILE ── */
-  @media (max-width: 640px) {
-    .plan-section { padding: 3rem 1.25rem 4rem; }
-    .calendar-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
-    .day-cell { min-height: 88px; padding: 0.7rem; }
-    .cell-task { font-size: 0.68rem; }
-    .mock-modal { padding: 1.5rem; }
-    .detail-actions { gap: 0.5rem; }
-    .btn-mock { margin-left: 0; }
-  }
-  @media (max-width: 400px) {
-    .calendar-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-</style>
-
-<!-- ── 30-DAY PLAN SECTION ── -->
+<!-- ── 30-MODULE PLAN SECTION ── -->
 <section style="border-top: 1px solid var(--border);">
   <div class="plan-section" id="plan">
 
     <!-- Header -->
     <div class="plan-header">
-      <div class="plan-eyebrow">📅 30-Day Plan</div>
-      <h2>Your Personal <span style="background: linear-gradient(135deg,#a78bfa,#4f8ef7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Prep Calendar</span></h2>
-      <p>A day-by-day roadmap tailored to 1–2 hrs on weekdays and 3 hrs on weekends. Click any day to see what to study and take a mock test.</p>
+      <div class="plan-eyebrow">📋 30-Module Plan</div>
+      <h2>Your Personal <span style="background: linear-gradient(135deg,#a78bfa,#4f8ef7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Prep Journey</span></h2>
+      <p>Work at your own pace — complete a module to unlock the next. Aim for at least one module a day, but feel free to power through more when you're in the zone.</p>
     </div>
 
     <!-- Legend -->
@@ -1253,18 +1310,23 @@
       <div class="legend-item"><span class="legend-dot" style="background:#a78bfa"></span> System Design</div>
       <div class="legend-item"><span class="legend-dot" style="background:#f472b6"></span> Claude Code</div>
       <div class="legend-item"><span class="legend-dot" style="background:#fbbf24"></span> Revision</div>
-      <div class="legend-item"><span class="legend-dot" style="background:gold; outline: 2px solid gold; outline-offset:1px; border-radius:3px;"></span> Today</div>
-      <div class="legend-item"><span class="legend-dot" style="background:rgba(248,113,113,0.4)"></span> Missed</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#34d399; outline: 2px solid #34d399; outline-offset:1px; border-radius:3px;"></span> Up Next</div>
+      <div class="legend-item"><span class="legend-dot" style="background:rgba(100,116,139,0.3)"></span> Locked</div>
     </div>
 
     <!-- Start prompt OR calendar -->
     <div id="planStartPrompt" class="start-prompt" style="display:none;">
       <div class="start-prompt-icon">🗓️</div>
       <h3>Ready to start your journey?</h3>
-      <p>Your 30-day plan will be personalised from today. Every day you open this, your progress stays exactly where you left it.</p>
-      <div class="today-pill" id="todayPill">Loading date…</div>
+      <p>Complete each module to unlock the next one. Go at your own pace — your progress is saved automatically every time you return.</p>
+      <ul class="pace-list">
+        <li>Aim for at least <strong>1 module per day</strong></li>
+        <li>Feeling focused? Knock out <strong>2–3 in a row</strong></li>
+        <li>Mark a module done to <strong>unlock the next</strong></li>
+        <li>Take the mock test after completing each module</li>
+      </ul>
       <button class="btn-start" onclick="planBegin()">
-        🚀 Begin 30-Day Plan
+        🚀 Start Module 1
       </button>
     </div>
 
@@ -1273,8 +1335,14 @@
       <div class="progress-bar-outer">
         <div class="progress-bar-inner" id="planProgressBar" style="width:0%"></div>
       </div>
-      <div class="progress-text" id="planProgressText"><strong>0</strong> / 30 days · Est. finish: —</div>
+      <div class="progress-text" id="planProgressText"><strong>0</strong> / 30 modules completed</div>
       <button class="btn-reset" onclick="planReset()">↺ Reset</button>
+    </div>
+
+    <!-- Pace hint banner -->
+    <div class="pace-hint" id="paceHint" style="display:none;">
+      <span class="pace-hint-icon">💡</span>
+      <span class="pace-hint-text" id="paceHintText">Complete a module to unlock the next one. You can do multiple modules in a single session.</span>
     </div>
 
     <!-- Calendar grid -->
@@ -1296,7 +1364,7 @@
 <script>
 (function() {
   /* ─────────────────────────────────────────────
-     DATA — 30-day curriculum
+     DATA — 30-module curriculum
   ───────────────────────────────────────────── */
   const TOPICS = {
     dsa:    { label: 'DSA',          icon: '🧩', color: '#34d399', resource: 'https://takeuforward.org/dsa/strivers-79-last-moment-dsa-sheet-ace-interviews', resourceLabel: 'Open Striver\'s Sheet' },
@@ -1308,157 +1376,261 @@
   };
 
   const DAYS = [
-    { topic:'dsa',    task:'Arrays & Strings — basics',         time:'1–2 hrs', subtopics:['Two-pointer technique','Sliding window basics','String reversal & anagrams','Prefix sums'] },
-    { topic:'dsa',    task:'Arrays & Strings — medium',         time:'1–2 hrs', subtopics:['Kadane\'s algorithm (max subarray)','Dutch national flag problem','Rotate matrix','Merge intervals'] },
-    { topic:'dsa',    task:'Arrays & Strings — patterns',       time:'1–2 hrs', subtopics:['Next permutation','Set matrix zeroes','Pascal\'s triangle','Stock buy/sell problems'] },
-    { topic:'dsa',    task:'Arrays continued + wrap-up',        time:'1–2 hrs', subtopics:['Trapping rainwater','3Sum / 4Sum','Longest common prefix','Product of array except self'] },
-    { topic:'dsa',    task:'Recursion & Backtracking',          time:'3 hrs',   subtopics:['Subsets & power set','Permutations','N-Queens problem','Sudoku solver approach'] },
-    { topic:'dsa',    task:'Binary Search',                     time:'3 hrs',   subtopics:['Classic binary search','Search in rotated array','Find peak element','Kth element in sorted arrays'] },
-    { topic:'dsa',    task:'Sorting algorithms',                time:'1–2 hrs', subtopics:['Merge sort & quick sort','Counting sort','Sort colors','Largest number from array'] },
-    { topic:'dsa',    task:'Linked Lists — basics',             time:'1–2 hrs', subtopics:['Reverse linked list','Detect cycle (Floyd\'s)','Merge two sorted lists','Find middle node'] },
-    { topic:'dsa',    task:'Linked Lists — advanced',           time:'1–2 hrs', subtopics:['LRU Cache','Clone list with random pointer','Flatten a multilevel list','Remove Nth from end'] },
-    { topic:'dsa',    task:'Trees — traversals & basics',       time:'1–2 hrs', subtopics:['Inorder / Preorder / Postorder','Level order traversal','Height & diameter','Symmetric tree'] },
-    { topic:'dsa',    task:'Trees — advanced problems',         time:'3 hrs',   subtopics:['Lowest common ancestor','Binary tree to DLL','Construct tree from traversals','Serialize/deserialize'] },
-    { topic:'dsa',    task:'Graphs — BFS & DFS',                time:'3 hrs',   subtopics:['BFS shortest path','DFS connected components','Number of islands','Flood fill'] },
-    { topic:'dsa',    task:'Graphs — advanced',                 time:'1–2 hrs', subtopics:['Topological sort (Kahn\'s)','Detect cycle in directed graph','Dijkstra\'s algorithm','Bipartite check'] },
-    { topic:'dsa',    task:'Dynamic Programming — intro',       time:'1–2 hrs', subtopics:['Climbing stairs / Fibonacci','0/1 Knapsack','Coin change','Longest common subsequence'] },
-    { topic:'js',     task:'Core JS — scope & closures',        time:'1–2 hrs', subtopics:['var / let / const differences','Closure definition & examples','Hoisting behaviour','IIFE pattern'] },
-    { topic:'js',     task:'Core JS — functions & this',        time:'1–2 hrs', subtopics:['Arrow functions vs regular functions','call / apply / bind','this keyword in different contexts','Currying & partial application'] },
-    { topic:'js',     task:'Core JS — types & coercion',        time:'1–2 hrs', subtopics:['Type coercion rules','== vs ===','typeof and instanceof','Nullish coalescing & optional chaining'] },
-    { topic:'js',     task:'Async JS — promises & event loop',  time:'3 hrs',   subtopics:['Call stack & event loop visualised','Promise chaining','Promise.all / race / allSettled','Microtasks vs macrotasks'] },
-    { topic:'js',     task:'Async JS — async/await',            time:'3 hrs',   subtopics:['async/await syntax','Error handling with try/catch','Parallel vs sequential async','Real-world fetch patterns'] },
-    { topic:'js',     task:'Advanced JS — prototypes & OOP',    time:'1–2 hrs', subtopics:['Prototype chain','Object.create','ES6 classes & inheritance','Mixins pattern'] },
-    { topic:'js',     task:'Advanced JS — DOM & events',        time:'1–2 hrs', subtopics:['Event delegation','Debounce & throttle','MutationObserver','localStorage vs sessionStorage'] },
-    { topic:'react',  task:'Hooks — useState & useEffect',      time:'1–2 hrs', subtopics:['State batching in React 18','useEffect cleanup','Dependency array gotchas','Avoiding stale closures'] },
-    { topic:'react',  task:'Hooks — useCallback & useMemo',     time:'1–2 hrs', subtopics:['When memoization actually helps','Reference equality','React.memo with hooks','Avoiding premature optimisation'] },
-    { topic:'react',  task:'Hooks — useRef & custom hooks',     time:'3 hrs',   subtopics:['useRef vs useState','Forwarding refs','Building useFetch','Building useDebounce'] },
-    { topic:'react',  task:'State management & Context',        time:'3 hrs',   subtopics:['Context API patterns','useReducer for complex state','When to use external state libs','Prop drilling solutions'] },
-    { topic:'react',  task:'Component architecture',            time:'1–2 hrs', subtopics:['Compound components','Render props pattern','HOC pattern','Controlled vs uncontrolled inputs'] },
-    { topic:'react',  task:'Performance & reconciliation',      time:'1–2 hrs', subtopics:['Virtual DOM & diffing','Code splitting with lazy()','Suspense boundaries','Profiler API'] },
+    { topic:'dsa',    task:'Arrays — Part 1', time:'1–2 hrs', subtopics:['Arrays category, problems 1–4 of 8 (per Striver\'s 79 sheet)', 'Focus: subarray sums, sorting-related array tricks, in-place rearrangement', 'Practice on the live tracker so progress saves to your account', 'Re-derive each brute-force solution before looking at the optimal one'] },
+    { topic:'dsa',    task:'Arrays — Part 2', time:'1–2 hrs', subtopics:['Arrays category, problems 5–8 of 8 (per Striver\'s 79 sheet)', 'Focus: searching/rotation patterns and array partitioning problems', 'Time yourself: aim for under 20 minutes per medium problem', 'Note any pattern you reuse across multiple array problems'] },
+    { topic:'dsa',    task:'Binary Search — Part 1', time:'1–2 hrs', subtopics:['Binary Search category, problems 1–4 of 8', 'Focus: search on sorted arrays, first/last occurrence, search in rotated array', 'Write the binary search template from memory before solving each problem', 'Watch for off-by-one errors in your low/high/mid boundaries'] },
+    { topic:'dsa',    task:'Binary Search — Part 2', time:'1–2 hrs', subtopics:['Binary Search category, problems 5–8 of 8', 'Focus: binary search on answer (allocation, capacity, threshold problems)', 'Identify the monotonic condition before coding the search', 'Practice converting a brute-force linear scan into a binary search on answer'] },
+    { topic:'dsa',    task:'Linked List', time:'3 hrs', subtopics:['Linked List category, all 6 problems', 'Focus: reversal, cycle detection, merging, and list manipulation', 'Draw pointer diagrams on paper before coding each problem', 'Pay attention to edge cases: empty list, single node, even/odd length'] },
+    { topic:'dsa',    task:'Recursion and Backtracking', time:'3 hrs', subtopics:['Recursion and Backtracking category, all 6 problems', 'Focus: subsets, permutations, combination-style backtracking', 'Draw the recursion tree for at least one problem to build intuition', 'Identify the base case and the choice/explore/un-choose pattern each time'] },
+    { topic:'dsa',    task:'Stacks/Queues', time:'1–2 hrs', subtopics:['Stacks/Queues category, all 6 problems', 'Focus: monotonic stack patterns, queue-based simulation problems', 'Identify when a problem hints at a stack via "next greater/smaller" phrasing', 'Implement at least one problem using only arrays (no built-in stack/queue)'] },
+    { topic:'dsa',    task:'Heaps + Tries', time:'1–2 hrs', subtopics:['Heaps category, all 3 problems', 'Tries category, all 3 problems', 'Focus: priority-queue based top-K problems and prefix-tree operations', 'Compare heap-based vs sorting-based solutions for time complexity trade-offs'] },
+    { topic:'dsa',    task:'Trees (BT + BST) — Part 1', time:'1–2 hrs', subtopics:['Trees (BT + BST) category, problems 1–6 of 11', 'Focus: traversals (inorder/preorder/postorder/level-order) and basic BST operations', 'Practice both recursive and iterative versions of each traversal', 'Review how BST properties simplify search/insert/delete compared to BT'] },
+    { topic:'dsa',    task:'Trees (BT + BST) — Part 2', time:'1–2 hrs', subtopics:['Trees (BT + BST) category, problems 7–11 of 11', 'Focus: LCA, tree construction from traversals, and advanced tree properties', 'Practice serializing and deserializing a binary tree', 'Review height-balanced and diameter-related tree problems'] },
+    { topic:'dsa',    task:'Graphs — Part 1', time:'3 hrs', subtopics:['Graphs category, problems 1–6 of 12', 'Focus: BFS/DFS fundamentals, connected components, flood fill style problems', 'Implement graph representation via adjacency list before solving', 'Practice both BFS and DFS on the same graph to compare results'] },
+    { topic:'dsa',    task:'Graphs — Part 2', time:'3 hrs', subtopics:['Graphs category, problems 7–12 of 12', 'Focus: topological sort, shortest path algorithms, cycle detection', 'Compare Kahn\'s algorithm vs DFS-based topological sort', 'Review when to use Dijkstra vs BFS vs Bellman-Ford'] },
+    { topic:'dsa',    task:'Dynamic Programming — Part 1', time:'1–2 hrs', subtopics:['Dynamic Programming category, problems 1–6 of 12', 'Focus: 1D DP (climbing stairs style) and basic knapsack variants', 'Write the recursive solution first, then memoize, then tabulate', 'Track the state transition formula for each problem in your notes'] },
+    { topic:'dsa',    task:'Dynamic Programming — Part 2 + String', time:'1–2 hrs', subtopics:['Dynamic Programming category, problems 7–12 of 12', 'String category, all 4 problems', 'Focus: 2D DP (grid/string matching) and core string-pattern problems', 'Review space-optimized DP (rolling array) for at least 2 problems'] },
+    { topic:'js',     task:'JavaScript Fundamentals (Q1–15)', time:'1–2 hrs', subtopics:['What is JavaScript?', 'Difference between var, let, and const?', 'What are arrow functions?', 'What is a closure?', 'Difference between == and ===?', 'What is the DOM?', 'What is hoisting?', 'What are template literals?', 'What is the difference between undefined and null?', 'How does setTimeout work?', 'What are higher-order functions?', 'What is the use of bind(), call(), and apply()?', 'What is event bubbling and capturing?', 'What is the spread operator (...) in JavaScript?', 'What is the rest operator in JavaScript?'] },
+    { topic:'js',     task:'Functions, Async & Event Loop (Q16–30)', time:'1–2 hrs', subtopics:['What are callback functions?', 'Difference between synchronous and asynchronous code?', 'What is Promise in JavaScript?', 'What is async/await?', 'Difference between map(), forEach(), filter()?', 'What is an IIFE (Immediately Invoked Function Expression)?', 'What is lexical scoping?', 'What is the this keyword?', 'What is the difference between stack and heap?', 'How to clone an object in JavaScript?', 'What is event delegation in JavaScript?', 'Difference between function declaration and expression?', 'What is a pure function?', 'Difference between slice and splice?', 'What is the event loop?'] },
+    { topic:'js',     task:'ES2020+ Operators & Error Handling (Q31–44)', time:'1–2 hrs', subtopics:['What is a promise chain?', 'What is optional chaining (?.)?', 'What is nullish coalescing (??)?', 'Difference between synchronous and asynchronous?', 'What is a thunk?', 'Difference between for...of and for...in?', 'What is memoization?', 'What is debouncing?', 'What is throttling?', 'What are data attributes in HTML/JS?', 'What are the different types of errors in JS?', 'How to handle errors in JS?', 'What is this in JavaScript?', 'How does bind() work?'] },
+    { topic:'js',     task:'Objects, Prototypes & Strict Mode (Q45–58)', time:'3 hrs', subtopics:['Difference between call() and apply()?', 'What is a generator function?', 'What is the new keyword in JS?', 'What are template engines?', 'Difference between innerHTML and textContent?', 'What is strict mode?', 'What is Object.freeze()?', 'What is a Symbol?', 'What are rest parameters?', 'How to clone an object?', 'Difference between deep and shallow copy?', 'What is typeof null?', 'What are falsy values?', 'How to check if a variable is an array?'] },
+    { topic:'js',     task:'Modules, Currying & Destructuring (Q59–72)', time:'3 hrs', subtopics:['How does JSON.parse() and JSON.stringify() work?', 'What is a tagged template literal?', 'What are JavaScript modules?', 'What is a WeakMap?', 'What is function currying?', 'What are default parameters?', 'How do you compare objects in JS?', 'What is prototype chaining?', 'Difference between == and Object.is()?', 'What is the call stack?', 'What is the microtask queue?', 'What is destructuring assignment?', 'What are optional parameters?', 'What is the role of "use strict"?'] },
+    { topic:'js',     task:'Array Methods & Utility Patterns (Q73–86)', time:'1–2 hrs', subtopics:['How to convert a string to number?', 'How to remove duplicates from array?', 'What is .reduce() used for?', 'What is the instanceof operator?', 'What is Promise.all()?', 'What is a ternary operator?', 'What is destructuring with aliasing?', 'How to flatten an array?', 'What is dynamic typing?', 'What is a factory function?', 'What is lexical scope?', 'What is a polyfill?', 'Difference between Object.seal() and Object.freeze()?', 'What are global variables?'] },
+    { topic:'js',     task:'Final Concepts & Wrap-up (Q87–100)', time:'1–2 hrs', subtopics:['How to prevent object modification?', 'What is callback hell?', 'What is a higher-order component (HOC)?', 'How to generate random numbers?', 'What is NaN and how to check it?', 'What are template literals?', 'How to merge arrays?', 'What is a constructor function?', 'What is a default case in switch?', 'What is recursion?', 'How to compare arrays?', 'What is .bind() method?', 'What is a WeakSet?', 'How do modules work in JS?'] },
+    { topic:'react',  task:'React Fundamentals & Components (Q1–17)', time:'1–2 hrs', subtopics:['What is React, and what are its main features?', 'What is JSX and how does it work?', 'Explain the concept of the Virtual DOM in React.', 'How does virtual DOM in React work? What are its benefits and downsides?', 'What is the difference between the real DOM and the virtual DOM?', 'What are React components?', 'What is the purpose of the key prop in React?', 'What is the consequence of using array indices as keys in React?', 'What are props in React? How are they different from state?', 'What is the difference between React\'s class components and functional components?', 'When should you use a class component over a function component?', 'What is React Fiber?', 'What is reconciliation?', 'What are controlled components in React?', 'What are uncontrolled components in React?', 'How would you lift the state up in a React application, and why is it necessary?', 'What is conditional rendering in React?'] },
+    { topic:'react',  task:'Hooks Deep Dive (Q18–34)', time:'1–2 hrs', subtopics:['What are React Fragments?', 'What are synthetic events in React?', 'What is the significance of React\'s declarative paradigm?', 'What are portals in React?', 'What is the difference between element and component in React?', 'What are Pure Components in React?', 'What are React Hooks?', 'What is the purpose of the useEffect hook?', 'What is the difference between useEffect and useLayoutEffect in React?', 'What does the dependency array of useEffect affect?', 'What is the useRef hook in React and when should it be used?', 'What is the purpose of callback function argument format of setState() in React class components and when should it be used?', 'What is the useCallback hook in React and when should it be used?', 'What is the useMemo hook in React and when should it be used?', 'What is the useReducer hook and when should it be used?', 'What is the Context API?', 'How do you create a custom hook in React?'] },
+    { topic:'react',  task:'Patterns, SSR & Data Flow (Q35–51)', time:'3 hrs', subtopics:['What are the Rules of Hooks?', 'What is forwardRef() in React used for?', 'What are error boundaries in React for?', 'What is code splitting in React?', 'What is lazy loading in React?', 'What is React Suspense?', 'What is server-side rendering (SSR) in React?', 'What is client-side rendering (CSR)?', 'What is hydration in React?', 'What is the Flux pattern?', 'Explain one-way data flow of React.', 'What are common React anti-patterns?', 'What are React best practices?', 'How do you decide between using React state, context, and external state managers?', 'Explain what happens when setState is called in React?', 'Explain prop drilling.', 'What is Redux?'] },
+    { topic:'react',  task:'Redux, Routing & Component Patterns (Q52–68)', time:'3 hrs', subtopics:['What are the core principles of Redux?', 'What is middleware in Redux?', 'What is Redux Toolkit?', 'What is React Router?', 'What are dynamic routes in React Router?', 'How does navigation work in React Router?', 'Explain static generation of React applications.', 'What are higher-order components in React?', 'Explain the presentational vs container component pattern in React.', 'What is render props pattern in React?', 'What is compound component pattern in React?', 'What is React Query (TanStack Query)?', 'How does React Query differ from Redux?', 'What is optimistic UI update?', 'How do you handle API calls in React?', 'What is caching in React applications?', 'What is memoization in React?'] },
+    { topic:'react',  task:'Performance, Testing & Accessibility (Q69–84)', time:'1–2 hrs', subtopics:['How can you optimize React application performance?', 'What causes a React component to re-render?', 'How do you prevent unnecessary re-renders?', 'What is React.memo?', 'What is tree shaking?', 'What is bundle splitting?', 'How do you measure performance in React?', 'What is React Testing Library?', 'What is Jest?', 'What is the difference between unit testing and integration testing in React?', 'How do you test React Hooks?', 'What are snapshots in React testing?', 'What is accessibility (a11y) in React?', 'How do you make React applications accessible?', 'What are ARIA attributes?', 'How do you handle forms in React?'] },
+    { topic:'react',  task:'Forms, i18n & Modern React (Q85–100)', time:'1–2 hrs', subtopics:['What are form validation techniques in React?', 'What is internationalization (i18n) in React?', 'How do you implement localization in React?', 'What is React Server Components?', 'What are Actions in React?', 'What is the React Compiler?', 'What is concurrent rendering in React?', 'What are transitions in React?', 'What is startTransition?', 'What is useTransition?', 'What is useDeferredValue?', 'What is streaming SSR?', 'What is partial hydration?', 'What is edge rendering?', 'What are common React interview coding challenges?', 'How would you architect a large-scale React application?'] },
     { topic:'sd',     task:'System Design — core concepts',     time:'3 hrs',   subtopics:['Load balancing strategies','Caching layers (Redis, CDN)','SQL vs NoSQL trade-offs','CAP theorem explained','Rate limiting algorithms','Horizontal vs vertical scaling'] },
     { topic:'claude', task:'Claude Code — all 27 Q&As',         time:'3 hrs',   subtopics:['Junior: install, CLI basics, slash commands','Mid: CLAUDE.md, permissions, Git integration','Senior: CI/CD, MCP, monorepo, enterprise security','File structure: CLAUDE.md hierarchy'] },
-    { topic:'rev',    task:'Final Mock + Weak Area Revision',   time:'1–2 hrs', subtopics:['Revisit your lowest mock scores','One timed mock interview session','Consolidate notes per topic','Review any skipped days'] },
+    { topic:'rev',    task:'Final Mock + Weak Area Revision',   time:'1–2 hrs',   subtopics:['Revisit your lowest mock scores','One timed mock interview session','Consolidate notes per topic','Review any skipped modules'] }
   ];
 
   /* ─────────────────────────────────────────────
      MOCK QUESTIONS BANK
   ───────────────────────────────────────────── */
   const QUESTIONS = {
-    dsa: [
-      { q:'What is the time complexity of binary search on a sorted array of n elements?', options:['O(n)','O(log n)','O(n log n)','O(1)'], ans:1, explanation:'Binary search halves the search space each iteration, giving O(log n) time complexity.' },
-      { q:'Which data structure is used in BFS traversal?', options:['Stack','Queue','Heap','Graph'], ans:1, explanation:'BFS uses a Queue (FIFO) to explore nodes level by level.' },
-      { q:'What does Kadane\'s algorithm solve?', options:['Shortest path','Maximum subarray sum','Longest common subsequence','Cycle detection'], ans:1, explanation:'Kadane\'s algorithm finds the contiguous subarray with the largest sum in O(n) time.' },
-      { q:'What is the space complexity of merge sort?', options:['O(1)','O(log n)','O(n)','O(n²)'], ans:2, explanation:'Merge sort requires O(n) auxiliary space for the temporary arrays during merging.' },
-      { q:'Floyd\'s cycle detection algorithm uses how many pointers?', options:['1','2','3','4'], ans:1, explanation:'Floyd\'s algorithm uses a slow pointer (1 step) and a fast pointer (2 steps) — two pointers total.' },
-      { q:'What is the time complexity of inserting into a hash table on average?', options:['O(n)','O(log n)','O(1)','O(n log n)'], ans:2, explanation:'Hash table insertion is O(1) average case due to direct index computation via the hash function.' },
-      { q:'Which algorithm is best for finding the shortest path in an unweighted graph?', options:['DFS','Dijkstra','BFS','Bellman-Ford'], ans:2, explanation:'BFS guarantees shortest path in unweighted graphs since it explores level by level.' },
-      { q:'What is topological sort used for?', options:['Finding cycles in undirected graphs','Ordering tasks with dependencies','Shortest path in weighted graphs','Balancing a BST'], ans:1, explanation:'Topological sort linearly orders vertices in a DAG such that for every edge u→v, u comes before v.' },
-      { q:'In the 0/1 Knapsack problem, each item can be:', options:['Taken fractionally','Taken multiple times','Taken once or not at all','Ignored always'], ans:2, explanation:'In 0/1 Knapsack, each item is either fully included (1) or excluded (0) — no fractions.' },
-      { q:'What does the two-pointer technique primarily help with?', options:['Tree traversal','Reducing O(n²) to O(n) on sorted arrays','Graph connectivity','Dynamic programming'], ans:1, explanation:'Two pointers reduce nested loops on sorted arrays/strings, often bringing O(n²) down to O(n).' },
+    1: [
+      { q: "What is the time complexity of Kadane's algorithm to find the maximum subarray sum in an array of size N?", options: ["O(N)", "O(N log N)", "O(N²)", "O(1)"], ans: 0, explanation: "Kadane's algorithm scans the array once from left to right, maintaining the maximum sum ending at the current position, completing in O(N) time." },
+      { q: "In the Dutch National Flag algorithm (3-pointer array partitioning of 0s, 1s, and 2s), what is the optimal worst-case time complexity?", options: ["O(N log N)", "O(N)", "O(N²)", "O(1)"], ans: 1, explanation: "The Dutch National Flag algorithm partitions the array in a single linear scan using three pointers, achieving O(N) worst-case time complexity." },
+      { q: "To rotate an array of size N to the right by K steps in-place with O(1) auxiliary space, what is a standard optimal approach?", options: ["Create an auxiliary array of size K, copy elements, and shift remaining", "Reverse the entire array, then reverse the first K elements, and reverse the remaining N-K elements", "Recursively split the array in halves and merge", "Convert the array to a binary search tree and perform an inorder traversal"], ans: 1, explanation: "The triple reversal segment technique (reverse all, reverse first K, reverse remaining N-K) shifts the array in-place using O(1) extra space and O(N) time." }
     ],
-    js: [
-      { q:'What does the following output?\n\nconsole.log(typeof null);', options:['"null"','"object"','"undefined"','"boolean"'], ans:1, explanation:'"typeof null" returning "object" is a well-known JavaScript bug preserved for backwards compatibility.' },
-      { q:'Which of these creates a closure?', options:['A function that returns a primitive','A function that references a variable from its outer scope','A function with no parameters','An immediately invoked function with no return'], ans:1, explanation:'A closure occurs when a function retains access to its lexical scope even after the outer function has returned.' },
-      { q:'What is the event loop\'s job in JavaScript?', options:['Execute async code in parallel threads','Move callbacks from the task queue to the call stack when the stack is empty','Parse and compile JS code','Manage memory allocation'], ans:1, explanation:'The event loop continuously checks if the call stack is empty and moves queued callbacks onto it for execution.' },
-      { q:'What does Promise.all() do when one promise rejects?', options:['Waits for all to complete','Rejects immediately with that error','Returns the resolved values ignoring the rejection','Retries the rejected promise'], ans:1, explanation:'Promise.all() short-circuits and rejects as soon as any one promise in the array rejects.' },
-      { q:'What is the output?\n\nconst a = [1,2,3];\nconst b = a;\nb.push(4);\nconsole.log(a.length);', options:['3','4','undefined','Error'], ans:1, explanation:'Arrays are reference types. b and a point to the same array, so pushing to b also modifies a.' },
-      { q:'Which method stops an event from propagating to parent elements?', options:['event.preventDefault()','event.stopPropagation()','event.stop()','event.cancel()'], ans:1, explanation:'stopPropagation() prevents the event from bubbling up to ancestor elements.' },
-      { q:'What does "hoisting" mean in JavaScript?', options:['Moving code to the bottom of the file','Declarations being moved to the top of their scope at parse time','Executing async code first','Optimising loops at runtime'], ans:1, explanation:'Hoisting moves variable and function declarations to the top of their scope before code execution.' },
-      { q:'What is the difference between == and ===?', options:['No difference','== checks value and type, === only value','=== checks value and type, == only value after coercion','=== is slower'], ans:2, explanation:'=== is strict equality (no coercion). == performs type coercion before comparison.' },
-      { q:'What does debouncing do?', options:['Calls a function immediately on every event','Delays a function call until after a pause in events','Calls a function at most once per interval','Removes duplicate function calls'], ans:1, explanation:'Debounce waits until events stop firing for a set delay before executing the function — useful for search inputs.' },
-      { q:'What is the prototype chain?', options:['A list of all functions in a module','The mechanism by which objects inherit properties from other objects','A design pattern for async code','A type of linked list in JS'], ans:1, explanation:'The prototype chain allows objects to inherit properties/methods from their prototype, enabling JavaScript\'s inheritance model.' },
+    2: [
+      { q: "In the Next Permutation algorithm, what is the first step to find the breakpoint?", options: ["Find the first element from the right that is smaller than its adjacent right element", "Find the absolute maximum element in the array", "Reverse the entire array to start over", "Swap the first and last elements of the array"], ans: 0, explanation: "Finding the first element from the right that satisfies arr[i] < arr[i+1] determines the breakpoint where the lexicographical order can be incremented." },
+      { q: "What is the optimal time complexity to find the majority element (an element that appears more than N/2 times) using Moore's Voting Algorithm?", options: ["O(N log N)", "O(N)", "O(N²)", "O(1)"], ans: 1, explanation: "Moore's Voting Algorithm identifies the majority candidate in O(N) time with O(1) auxiliary space by incrementing/decrementing a counter based on element equality." },
+      { q: "Which approach is highly optimal (O(N) time, O(1) auxiliary space) to find the missing and repeating number in an array from 1 to N?", options: ["Sort the array first and scan sequentially", "Floyd's Cycle Detection on index mapping OR Math equations based on Sum and Squares of Sums", "Perform a binary search on the entire answer space", "Use a hash map to count occurrences"], ans: 1, explanation: "Math equations (sum and sum of squares difference) or index-based cyclic sorting allows finding both numbers in O(N) time and O(1) auxiliary space." }
     ],
-    react: [
-      { q:'What triggers a re-render in a React functional component?', options:['Any variable change','State or prop change','Only setState calls','setTimeout callbacks'], ans:1, explanation:'React re-renders a component when its state changes (via useState/useReducer) or when parent passes new props.' },
-      { q:'What is the purpose of the useCallback hook?', options:['Memoize a computed value','Memoize a function reference to prevent recreation on every render','Fetch data on mount','Replace useState for complex state'], ans:1, explanation:'useCallback memoizes a function reference so child components receiving it as a prop don\'t re-render unnecessarily.' },
-      { q:'When does useEffect run with an empty dependency array []?', options:['On every render','Only on mount','On every state change','Never'], ans:1, explanation:'An empty dependency array means the effect runs once after the initial render — equivalent to componentDidMount.' },
-      { q:'What does React.memo do?', options:['Memoizes state','Prevents re-render if props haven\'t changed','Caches API responses','Replaces useMemo'], ans:1, explanation:'React.memo is a HOC that shallowly compares props and skips re-rendering if they haven\'t changed.' },
-      { q:'What is a controlled component?', options:['A component with no props','A component whose form input value is managed by React state','A component that controls its children\'s state','A memoized component'], ans:1, explanation:'In a controlled component, form data is handled by React state (value + onChange), not the DOM.' },
-      { q:'What does the key prop do in a list?', options:['Styles list items','Helps React identify which items changed, added, or removed','Makes items draggable','Sets ARIA labels'], ans:1, explanation:'The key prop gives React a stable identity for each list item, enabling efficient reconciliation.' },
-      { q:'What is the Context API used for?', options:['Fetching API data','Passing data through the component tree without props drilling','Managing side effects','Handling errors'], ans:1, explanation:'Context provides a way to share values (theme, auth, locale) globally without passing props at every level.' },
-      { q:'What does useRef return?', options:['A state variable','A mutable object with a .current property that persists across renders','A cached function','A DOM event'], ans:1, explanation:'useRef returns { current: initialValue } — mutating .current doesn\'t trigger a re-render, unlike useState.' },
-      { q:'What is code splitting in React?', options:['Splitting CSS files','Breaking the app into smaller chunks loaded on demand','Dividing state across components','Splitting API calls'], ans:1, explanation:'Code splitting (via React.lazy + dynamic import) defers loading parts of the app until they\'re needed, reducing initial bundle size.' },
-      { q:'What is the reconciliation process?', options:['Merging two state objects','React\'s algorithm for diffing the virtual DOM to determine minimal real DOM updates','Converting JSX to HTML','Resolving promise chains'], ans:1, explanation:'Reconciliation is how React compares the new virtual DOM tree with the previous one and applies only the necessary real DOM changes.' },
+    3: [
+      { q: "What is the primary condition required to apply standard binary search to find a target element in an array?", options: ["The array must be sorted", "The array must have an even number of elements", "The array must not contain duplicates", "The array must be dynamic"], ans: 0, explanation: "Standard binary search divides the search space in halves, which requires the elements to be in a sorted order to determine which half to discard." },
+      { q: "In a search within a rotated sorted array, how do we determine which half of the array is sorted?", options: ["Compare the middle element with the low or high boundary element to find the sorted half", "Check if the array has duplicates", "Always assume the left half is sorted", "Divide the middle element index by 2"], ans: 0, explanation: "By comparing arr[mid] with arr[low] or arr[high], we can identify if the left half (arr[low] <= arr[mid]) or the right half is sorted, allowing us to branch correctly." },
+      { q: "When finding the first or last occurrence of a target using binary search, what is the key logic modification when we find arr[mid] == target?", options: ["Stop and return the mid index immediately", "Move low to mid + 1 to find first, and high to mid - 1 to find last", "Continue searching in the half-space by shifting boundaries (high = mid-1 for first, low = mid+1 for last)", "Throw an exception"], ans: 2, explanation: "To find the leftmost (first) or rightmost (last) occurrence, we record the mid index as a potential answer and continue searching in the left or right subarray respectively." }
     ],
-    sd: [
-      { q:'What does horizontal scaling mean?', options:['Upgrading a single server\'s CPU/RAM','Adding more servers to distribute load','Increasing database storage','Partitioning data across tables'], ans:1, explanation:'Horizontal scaling (scale-out) adds more machines; vertical scaling (scale-up) adds resources to existing machines.' },
-      { q:'What problem does a CDN primarily solve?', options:['Database bottlenecks','High latency for geographically distributed users','API rate limiting','Memory leaks'], ans:1, explanation:'CDNs cache static content at edge locations closer to users, reducing latency and origin server load.' },
-      { q:'In CAP theorem, what does "P" stand for?', options:['Performance','Partition Tolerance','Persistence','Pub-Sub'], ans:1, explanation:'CAP theorem states a distributed system can guarantee at most two of: Consistency, Availability, Partition Tolerance.' },
-      { q:'What is the main advantage of a message queue (e.g., Kafka)?', options:['Faster SQL queries','Decoupling producers and consumers for async processing','Replacing load balancers','Eliminating the need for caching'], ans:1, explanation:'Message queues decouple services, allow async processing, enable rate control, and provide durability for events.' },
-      { q:'What is database sharding?', options:['Replicating data across read replicas','Partitioning data horizontally across multiple databases','Encrypting database columns','Indexing every column'], ans:1, explanation:'Sharding splits a large dataset into smaller partitions (shards) stored on separate database instances to enable horizontal scaling.' },
+    4: [
+      { q: "In binary search on answers problems (e.g., Book Allocation, Aggressive Cows), what is the key characteristic of the search space?", options: ["It is monotonic (for any value x, if x is valid/invalid, we can safely eliminate half of the range)", "It has a tree structure", "It consists of prime numbers only", "It is sorted in descending order only"], ans: 0, explanation: "A monotonic search space guarantees that if a candidate value x is feasible, all values greater than (or less than) x are also feasible/infeasible, enabling binary division." },
+      { q: "What are the logical search boundaries (low and high) for the binary search on answers in the 'Koko Eating Bananas' problem?", options: ["low = 1 and high = maximum bananas in a single pile", "low = 0 and high = sum of all bananas", "low = minimum bananas and high = sum of all bananas", "low = 1 and high = sum of all bananas"], ans: 0, explanation: "Koko eats at least 1 banana per hour (low = 1) and at most the size of the largest pile per hour (high = max(piles)) because she only eats from one pile per hour." },
+      { q: "When binary searching on an answer, what function is commonly implemented to evaluate candidates?", options: ["An iterative validation checker function that typically runs in O(N) time", "A recursive factorial function", "A hashing function to check values", "A binary search function running in O(log N) time"], ans: 0, explanation: "A greedy validation function runs in O(N) linear time to check if a specific candidate transfer velocity/capacity meets the constraints." }
     ],
-    claude: [
-      { q:'What is CLAUDE.md used for in a Claude Code project?', options:['Storing API keys','Providing project-specific instructions and context to Claude','Defining CI/CD pipelines','Managing npm dependencies'], ans:1, explanation:'CLAUDE.md files store persistent project context — coding conventions, architecture notes, team standards — that Claude reads automatically.' },
-      { q:'Which slash command compresses context while keeping a summary?', options:['/clear','/help','/compact','/reset'], ans:2, explanation:'/compact summarises and compresses the conversation context to free up space while retaining essential information.' },
-      { q:'What does the -p flag enable in Claude Code?', options:['Private mode','Non-interactive (headless) mode for scripting and CI','Premium model access','Parallel task execution'], ans:1, explanation:'The -p flag runs Claude Code non-interactively, passing a prompt directly — ideal for CI/CD pipelines and automation scripts.' },
-      { q:'Where should team-wide permissions be configured in Claude Code?', options:['CLAUDE.md','package.json','.claude/settings.json','~/.bashrc'], ans:2, explanation:'.claude/settings.json at the repo root stores shared tool permissions that apply consistently across the whole team.' },
-      { q:'What is MCP in the context of Claude Code?', options:['Model Control Protocol','Model Context Protocol — a standard for connecting Claude to external tools and data sources','Memory Cache Protocol','Multi-Claude Processing'], ans:1, explanation:'MCP (Model Context Protocol) is Anthropic\'s open standard that lets Claude connect to databases, APIs, and tools via a plugin-like system.' },
-      { q:'Which CLAUDE.md file takes highest priority?', options:['The one in the project root','The one in the src/ folder','The one in ~/.claude/','The one in .claude/'], ans:2, explanation:'CLAUDE.md files are hierarchical. User-level (~/.claude/CLAUDE.md) sets global defaults; repo-level and folder-level files add or override context for specific scopes.' },
-      { q:'What happens when Claude Code hits the 200k token context limit?', options:['It crashes','It automatically starts a new session','It prompts you to use /compact or /clear','It deletes old files'], ans:2, explanation:'Claude Code warns you and recommends /compact (compress with summary) or /clear (full reset) to manage the context window.' },
-      { q:'How does Claude Code integrate with Git?', options:['It has no Git integration','It can stage, commit, diff, and create branches via bash tool access','It replaces Git entirely','It only reads .gitignore'], ans:1, explanation:'Claude Code can run any Git command through its bash tool access — diffing changes, staging files, writing commit messages, and managing branches.' },
-      { q:'What is the Task tool in Claude Code used for?', options:['Managing TODO comments','Spawning subagents to run parallel or sequential sub-tasks','Creating GitHub issues','Scheduling cron jobs'], ans:1, explanation:'The Task tool lets Claude spin up subagents to handle complex workflows with multiple independent or sequential steps.' },
-      { q:'What is the recommended way to handle sensitive data in Claude Code enterprise setups?', options:['Store secrets in CLAUDE.md','Use environment variables and never put secrets in CLAUDE.md or settings.json','Hardcode in the source','Store in .claude/ folder'], ans:1, explanation:'Secrets should live in environment variables or a secrets manager. CLAUDE.md and settings.json are committed to version control and must never contain credentials.' },
+    5: [
+      { q: "Which Floyd's algorithm technique is used for detecting a cycle in a singly linked list?", options: ["Breadth-First Search", "Fast and slow pointers (tortoise and hare)", "Divide and conquer", "Iterative backtracking"], ans: 1, explanation: "Floyd's Cycle Detection uses a slow pointer moving 1 step and a fast pointer moving 2 steps. If a cycle exists, they are guaranteed to meet." },
+      { q: "What is the time and auxiliary space complexity to reverse a singly linked list in-place?", options: ["O(N) time and O(N) space", "O(N) time and O(1) space", "O(N²) time and O(1) space", "O(log N) time and O(1) space"], ans: 1, explanation: "Reversing a linked list requires pointer reassignment in a single scan, consuming O(N) time and O(1) auxiliary memory." },
+      { q: "When finding the intersection point of two Y-shaped linked lists, what is a highly space-efficient O(1) space method?", options: ["Using a hashing set of traversed nodes", "Use two pointers, resetting each pointer to the opposite list's head upon reaching the end", "Reversing both lists first", "Sorting both lists"], ans: 1, explanation: "Resetting each pointer to the opposite list's head resolves the length difference (N - M) discrepancy, aligning them to meet precisely at the intersection point." }
     ],
-    rev: [
-      { q:'Which Big-O complexity is considered efficient enough for most interview problems with n ≤ 10⁶?', options:['O(n²)','O(n log n) or better','O(2ⁿ)','O(n!)'], ans:1, explanation:'O(n log n) or better (O(n), O(log n)) is generally acceptable for large inputs. O(n²) starts failing around n = 10⁴–10⁵.' },
-      { q:'What is the first thing you should do when given a system design question?', options:['Draw the architecture immediately','Clarify requirements and estimate scale','Write code','Choose a database'], ans:1, explanation:'Always clarify functional requirements, non-functional requirements (scale, latency, availability), and constraints before designing anything.' },
-      { q:'What React hook would you use to avoid a child component re-rendering when its parent re-renders?', options:['useState','useRef','React.memo + useCallback','useEffect'], ans:2, explanation:'React.memo prevents re-render when props haven\'t changed; useCallback memoizes the function props passed down so their reference stays stable.' },
-      { q:'In JavaScript, what is the output of: [1,2,3].map(parseInt)?', options:['[1,2,3]','[1,NaN,NaN]','[1,1,1]','Error'], ans:1, explanation:'map passes (value, index) to parseInt. parseInt("2", 1) and parseInt("3", 2) return NaN because base 1 is invalid and "3" isn\'t valid in base 2.' },
-      { q:'What does the CAP theorem say a distributed system must sacrifice during a network partition?', options:['Performance','Either Consistency or Availability','Security','Durability'], ans:1, explanation:'During a network partition, a distributed system must choose between remaining consistent (returning errors) or remaining available (returning potentially stale data).' },
-      { q:'Which Claude Code file stores folder-specific instructions closest to the code?', options:['~/.claude/CLAUDE.md','Root CLAUDE.md','.claude/CLAUDE.md','A CLAUDE.md inside the relevant subfolder'], ans:3, explanation:'A CLAUDE.md placed inside a specific subfolder (e.g. src/) gives Claude context scoped to just that folder and its children.' },
-      { q:'What is event delegation in JavaScript?', options:['Delegating async events to a worker','Attaching one listener to a parent to handle events from many children','Removing event listeners automatically','Using CustomEvent for component communication'], ans:1, explanation:'Event delegation leverages event bubbling — attach one listener to a parent and check event.target to handle events from many child elements efficiently.' },
-      { q:'When should you use useReducer over useState?', options:['Always','When state logic involves multiple sub-values or complex transitions','Only in class components','When you need to fetch data'], ans:1, explanation:'useReducer shines with complex state that has multiple related fields or transitions that depend on previous state — centralises update logic.' },
-      { q:'What does topological sort require about the input graph?', options:['It must be weighted','It must be a DAG (Directed Acyclic Graph)','It must be undirected','It must be fully connected'], ans:1, explanation:'Topological sort only works on Directed Acyclic Graphs. A cycle makes a linear ordering impossible.' },
-      { q:'In React, what is "prop drilling" and how is it typically solved?', options:['A performance bug; solved by useMemo','Passing props through many layers unnecessarily; solved by Context API or state management libraries','A memory leak; solved by cleanup in useEffect','A re-render issue; solved by React.memo'], ans:1, explanation:'Prop drilling is passing data through many intermediate components that don\'t use it. Context API, Redux, or Zustand are common solutions.' },
-      { q:'What HTTP status code indicates a rate limit has been exceeded?', options:['400','401','403','429'], ans:3, explanation:'429 Too Many Requests is the standard status code for rate limiting. 401 = unauthenticated, 403 = forbidden, 400 = bad request.' },
-      { q:'What is the Virtual DOM in React?', options:['A server-side rendering technique','An in-memory representation of the real DOM used for efficient diffing','A CSS-in-JS solution','A database for component state'], ans:1, explanation:'The Virtual DOM is a lightweight JavaScript object tree mirroring the real DOM. React diffs old vs new virtual DOM and applies minimal real DOM changes.' },
-      { q:'What does Big-O O(1) space complexity mean?', options:['The algorithm uses one variable','The algorithm\'s memory usage doesn\'t grow with input size','The algorithm runs in constant time','The algorithm uses no memory'], ans:1, explanation:'O(1) space means the algorithm uses a fixed amount of memory regardless of input size — like an in-place sort using only a few pointer variables.' },
-      { q:'What is a race condition in async JavaScript?', options:['When two setTimeout calls run at the same time','When multiple async operations complete in an unpredictable order causing incorrect results','When a Promise rejects unexpectedly','When the event loop is blocked'], ans:1, explanation:'A race condition occurs when the result depends on the timing of async operations — e.g., two fetches updating the same state where the second may overwrite the first.' },
-      { q:'Which system design pattern helps prevent a slow service from taking down the whole system?', options:['Singleton pattern','Circuit breaker pattern','Factory pattern','Observer pattern'], ans:1, explanation:'The circuit breaker pattern detects failures and short-circuits calls to a struggling service, preventing cascading failures across the system.' },
-      { q:'What is the difference between localStorage and sessionStorage?', options:['No difference','localStorage persists after browser close; sessionStorage clears when the tab closes','sessionStorage has more capacity','localStorage is encrypted'], ans:1, explanation:'localStorage data persists indefinitely until explicitly cleared. sessionStorage is scoped to the browser tab and is cleared when the tab closes.' },
-      { q:'What does the spread operator (...) do when used with arrays?', options:['Converts an array to a string','Creates a shallow copy or merges arrays','Sorts the array','Removes duplicates'], ans:1, explanation:'The spread operator expands an iterable\'s elements — useful for shallow copying arrays ([...a]) or merging ([...a, ...b]).' },
-      { q:'In system design, what does "eventual consistency" mean?', options:['Data is always up to date','Replicas will converge to the same value given enough time without new updates','Transactions are atomic','Queries always return consistent results'], ans:1, explanation:'Eventual consistency (used by systems like DynamoDB, Cassandra) means replicas may temporarily differ but will sync to the same state eventually.' },
-      { q:'What is the purpose of the useMemo hook?', options:['Memoize a callback function','Cache the result of an expensive computation between renders','Persist state across sessions','Fetch data once on mount'], ans:1, explanation:'useMemo caches the return value of a function between renders, recomputing only when its dependencies change — useful for expensive calculations.' },
-      { q:'Which of these is NOT a valid HTTP method?', options:['GET','POST','FETCH','DELETE'], ans:2, explanation:'FETCH is not an HTTP method — it\'s the name of the JavaScript browser API. Standard methods include GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD.' },
+    6: [
+      { q: "What is the primary purpose of backtracking compared to pure recursive branch generation?", options: ["Pruning search paths that are guaranteed not to lead to a valid solution", "Using dynamic programming arrays", "Avoiding recursive call stacks", "Sorting output arrays automatically"], ans: 0, explanation: "Backtracking tracks conditions and prunes the recursive tree early, preventing the exploration of invalid paths." },
+      { q: "For the N-Queens placement problem on an N x N board, what is the standard worst-case time complexity?", options: ["O(N)", "O(N²)", "O(N!)", "O(2^N)"], ans: 2, explanation: "Placing N queens such that no two attack each other yields O(N!) possible states to explore, as each row choice restricts subsequent rows." },
+      { q: "In generating all unique permutations of an array containing duplicates, how do we avoid repeating permutations?", options: ["Sort the array and skip duplicate elements adjacent to the current branch", "Run the loop backwards", "Ignore the base case", "Convert all elements to strings"], ans: 0, explanation: "Sorting the array allows us to easily check if we have already used an identical element at the current level of recursion, avoiding duplicate paths." }
     ],
+    7: [
+      { q: "Which data structure pattern is optimal for finding the 'Next Greater Element' for every element in an array in O(N) total time?", options: ["Min-Heap", "Monotonic Stack", "Circular Queue", "Binary Search Tree"], ans: 1, explanation: "A monotonic stack keeps elements in falling/rising order, allowing us to find the next greater element in a single pass with O(N) time." },
+      { q: "If you want to implement a Queue using two Stacks, what is the amortized cost of the dequeue (pop) operation?", options: ["O(1)", "O(log N)", "O(N)", "O(N²)"], ans: 0, explanation: "While a single pop may trigger pushing all elements from stack1 to stack2, each element is pushed and popped a constant number of times overall, leading to O(1) amortized cost." },
+      { q: "In the 'Sliding Window Maximum' problem, which data structure is typically used to get the maximum in O(1) time per window shift?", options: ["Fully sorted list", "Double-ended queue (Deque) maintaining indices in index-monotone order", "Direct array with index offsets", "Stack with recursion"], ans: 1, explanation: "A Deque stores indices of elements within the window in decreasing order of value. The front of the deque always holds the current maximum." }
+    ],
+    8: [
+      { q: "What is the time complexity to insert an element into a binary heap of size N?", options: ["O(1)", "O(log N)", "O(N)", "O(N log N)"], ans: 1, explanation: "Inserting an element appends it to the end of the heap and bubble-ups, which takes at most O(log N) operations (the height of the tree)." },
+      { q: "Which TrieNode structure is standard for implementing a prefix search containing lowercase English alphabets?", options: ["An array of 26 pointers for child nodes and an isEnd boolean", "A simple linked list of characters", "A stack of 26 characters", "A binary search tree at each node"], ans: 0, explanation: "An array of size 26 maps 'a'-'z' to children offsets in constant time, accompanied by a boolean to mark the end of valid words." },
+      { q: "For finding the 'K-th' largest element in a stream of numbers, what size heap is optimal to maintain?", options: ["A min-heap of size K", "A max-heap of size N", "A min-heap of size N", "A double-ended queue of size K"], ans: 0, explanation: "By maintaining a min-heap of size K, the root always stores the K-th largest element, allowing O(1) read and O(log K) updates." }
+    ],
+    9: [
+      { q: "Which traversal of a Binary Search Tree (BST) produces a list of keys sorted in ascending order?", options: ["Preorder", "Inorder", "Postorder", "Level-order"], ans: 1, explanation: "Inorder traversal visits the left subtree, the root, and then the right subtree, which matches the sorted key property of a BST." },
+      { q: "What is the time complexity of searching for a key in a balanced BST of height H?", options: ["O(1)", "O(H) / O(log N)", "O(N)", "O(N log N)"], ans: 1, explanation: "In a balanced BST, height H is O(log N), and each step down the tree discards half of the remaining keys, taking O(H) operations." },
+      { q: "What is the maximum number of nodes in a binary tree of height H?", options: ["2^H - 1", "2^(H-1)", "H²", "2H"], ans: 0, explanation: "A fully complete binary tree of height H has 1 + 2 + 4 + ... + 2^(H-1) nodes, which sums to 2^H - 1." }
+    ],
+    10: [
+      { q: "What does LCA stand for in binary tree problems?", options: ["Lowest Common Ancestor", "Largest Child Array", "Leftmost Child Alignment", "Linked Child Association"], ans: 0, explanation: "LCA is the Lowest Common Ancestor — the shared ancestor node of two nodes p and q that is located lowest (deepest) in the tree." },
+      { q: "To uniquely construct a binary tree, which pair of traversals is sufficient?", options: ["Inorder and Preorder (or Inorder and Postorder)", "Preorder and Postorder only", "Level-order and Preorder only", "Any traversal pair is always sufficient"], ans: 0, explanation: "Inorder traversal is required to distinguish left and right branches, and either preorder or postorder determines the root hierarchy." },
+      { q: "What is a 'Height-Balanced' binary tree (AVL-like property)?", options: ["For every node, the difference between the height of its left and right subtrees is at most 1", "All leaf nodes must be at the exact same depth", "Every left node must be smaller than its right node", "It is a tree with height exactly equal to log N"], ans: 0, explanation: "A tree is height-balanced if for every node, the left and right subtree heights differ by no more than 1, preventing the tree from degenerating into a list." }
+    ],
+    11: [
+      { q: "Which traversal method uses a queue data structure and explores neighbors level by level?", options: ["Depth-First Search (DFS)", "Breadth-First Search (BFS)", "Preorder traversal", "Topological Sort"], ans: 1, explanation: "BFS uses a Queue (FIFO) to explore all immediate neighbor nodes before going a layer deeper." },
+      { q: "In finding the number of disconnected islands in a 2D matrix, what behaves as a node in the graph representation?", options: ["Each grid cell value", "The dimensions of the matrix", "An individual component land cell (with edges to adjacent land cells)", "The border of the matrix"], ans: 2, explanation: "Each land cell '1' represents a vertex, and adjacent land cells establish undirected edges. Connected components determine islands." },
+      { q: "In a standard Flood Fill algorithm, which traversal is generally easiest to implement recursively?", options: ["DFS (Depth-First Search)", "Dijkstra's algorithm", "Bellman-Ford algorithm", "Prim's algorithm"], ans: 0, explanation: "DFS recursively visits and recolors adjacent cells in-depth first, making call stack manipulation highly clean and simple." }
+    ],
+    12: [
+      { q: "Topological sort is only applicable to which type of graph?", options: ["Undirected Graphs with cycles", "Directed Acyclic Graphs (DAGs)", "Complete Undirected Graphs", "Bipartite Graphs"], ans: 1, explanation: "A graph must be directed (to show dependency direction) and acyclic (as cycles make linear dependency orders impossible) to form a topological sort." },
+      { q: "Which algorithm is best suited to find the shortest path from a single source to all other nodes in a weighted graph with positive edge weights?", options: ["Kahn's algorithm", "Bellman-Ford algorithm", "Dijkstra's algorithm", "Kruskal's algorithm"], ans: 2, explanation: "Dijkstra's greedy algorithm finds single-source shortest paths in O((V + E) log V) time when weights are positive." },
+      { q: "How does Kahn's algorithm for topological sorting keep track of nodes to process?", options: ["By storing nodes in a stack after fully exploring them", "By maintaining the in-degree of each node and adding nodes with in-degree 0 to a queue", "By finding cycles first", "By using a DFS recursion track"], ans: 1, explanation: "Kahn's algorithm reduces in-degrees of neighbors as vertices are pulled, queuing nodes once their in-degree becomes 0." }
+    ],
+    13: [
+      { q: "What is the key difference between memoization (Top-Down) and tabulation (Bottom-Up) in DP?", options: ["Memoization uses recursion and a cache; tabulation uses an iterative table", "Memoization consumes less memory always", "Tabulation has worse time complexity", "Tabulation is recursive"], ans: 0, explanation: "Memoization starts from the target state and recursively explores, caching results. Tabulation starts from base cases and fills an array iteratively." },
+      { q: "In the 'Climbing Stairs' problem, the state transition relation translates directly to which mathematical sequence?", options: ["Factorial", "Fibonacci sequence (dp[i] = dp[i-1] + dp[i-2])", "Arithmetic Progression", "Prime number gaps"], ans: 1, explanation: "Since you can only reach step i from step i-1 or step i-2, the number of ways is the sum of ways to reach both, replicating the Fibonacci recurrence." },
+      { q: "For a 0/1 Knapsack problem with N items and weight capacity W, what are the dimensions of the default DP table?", options: ["[N] x [W + 1]", "[N] x [N]", "[W] x [W]", "[N + 1] x [W + 1]"], ans: 3, explanation: "The DP table requires state indices from 0 to N (items processed) and 0 to W (remaining capacities), resulting in size (N + 1) x (W + 1)." }
+    ],
+    14: [
+      { q: "In the 'Longest Common Subsequence' (LCS) of strings S1 and S2, if S1[i] == S2[j], what is the transition formula?", options: ["dp[i][j] = dp[i-1][j-1] + 1", "dp[i][j] = max(dp[i-1][j], dp[i][j-1])", "dp[i][j] = dp[i-1][j-1]", "dp[i][j] = dp[i][j-1] + 1"], ans: 0, explanation: "When S1[i] matches S2[j], the LCS length increases by 1, building on the LCS of the remaining prefixes S1[0..i-1] and S2[0..j-1]." },
+      { q: "Which algorithm is best suited for searching a string pattern P of length M in text T of length N with O(N+M) time complexity?", options: ["Floyd-Warshall", "KMP (Knuth-Morris-Pratt) algorithm", "Sieve of Eratosthenes", "Kruskal's algorithm"], ans: 1, explanation: "KMP uses a precomputed partial match table (LPS array) to avoid backing up in the text, finding matches in O(N+M) time." },
+      { q: "When space-optimizing a 2D dynamic programming grid (e.g., Unique Paths), how many rows do we actually need to keep in memory?", options: ["Only the previous row / 1D array", "Exactly half of the rows", "None, space optimization is impossible", "All N rows"], ans: 0, explanation: "Since state transition only depends on the current and previous cells of the immediately preceding row, we can reduce space to a 1D array of size O(cols)." }
+    ],
+    15: [
+      { q: "Which of the following is blocked from re-assignment but can have its properties/keys modified?", options: ["var", "let", "const", "Symbol"], ans: 2, explanation: "Variables declared with const cannot be reassigned. However, if the value is an object or array, its contents can still be mutated." },
+      { q: "What is the scope of a variable declared with let or const?", options: ["Function scope", "Global scope only", "Block scope", "No scope"], ans: 2, explanation: "let and const are block-scoped, meaning they only exist within the closest pair of curly braces {}, unlike var which is function-scoped." },
+      { q: "What is the value of x after declaration: let x;?", options: ["null", "undefined", "0", "ReferenceError"], ans: 1, explanation: "Declared variables in JavaScript that are not initialized are assigned the default value of undefined." }
+    ],
+    16: [
+      { q: "What object does the keyword 'this' refer to inside a standard function called as a method of an object?", options: ["The global window object", "The host object that owns the method", "The local function scope", "undefined"], ans: 1, explanation: "Inside an object's method, 'this' refers to the object on which the method was called." },
+      { q: "Where does an asynchronous Promise resolution callback (.then/.catch) execute?", options: ["MacroTask queue", "MicroTask queue", "Direct call stack synchronously", "Web APIs thread"], ans: 1, explanation: "Promises use the MicroTask queue, which has higher priority than the MacroTask queue (used by setTimeout) and runs immediately after the call stack empties." },
+      { q: "If three setTimeout calls are scheduled with 0ms delay, and a heavy synchronous loop runs for 1 second, when do the timers run?", options: ["Immediately, interrupting the synchronous loop", "Directly after the synchronous loop ends and the call stack is empty", "They are cancelled", "In separate parallel worker threads"], ans: 1, explanation: "JavaScript is single-threaded. Async timers can only execute when the synchronous call stack is entirely empty, regardless of delay settings." }
+    ],
+    17: [
+      { q: "What does the nullish coalescing operator ?? return if the left-hand operand is 0?", options: ["0", "undefined", "null", "The right-hand operand"], ans: 0, explanation: "?? only falls back to the right-hand side if the left-hand side is null or undefined. 0 is a falsy but defined value, so 0 is returned." },
+      { q: "If you want to ensure a search handler executes at most once per every 500ms, which technique should you use?", options: ["Debouncing", "Throttling", "Promises", "Error bubbling"], ans: 1, explanation: "Throttling limits the execution frequency to once per interval. Debouncing delays execution until a quiet period of inactivity." },
+      { q: "What is the syntax for optional chaining, introduced in ES2020?", options: ["?.", "?::", "??.", "!?"], ans: 0, explanation: "Optional chaining is represented as ?. and short-circuits to return undefined if any intermediate property in the reference chain is null or undefined." }
+    ],
+    18: [
+      { q: "What is the main difference between Object.freeze() and Object.seal()?", options: ["freeze prevents adding/removing but allows editing values", "freeze prevents editing, adding, and removing; seal allows editing existing values but prevents adding/removing", "seal prevents everything, freeze does not", "No difference"], ans: 1, explanation: "Object.freeze makes an object completely read-only; Object.seal lets you edit existing properties but prevents adding new ones or deleting existing ones." },
+      { q: "In strict mode ('use strict'), what happens if you assign a value to an undeclared variable?", options: ["It silently creates a global variable", "It throws a ReferenceError", "It is logged as a warning", "It creates a localized block variable"], ans: 1, explanation: "Strict mode prevents accidental global variable creation by throwing a ReferenceError when assigning a value to an undeclared reference." },
+      { q: "The standard syntax const copy = { ...original } performs what type of cloning?", options: ["Deep copy", "Shallow copy", "Symbolic copy only", "Instance copy"], ans: 1, explanation: "The spread operator performs a shallow copy, copying top-level primitive values but copying references for nested objects or arrays." }
+    ],
+    19: [
+      { q: "How do you write a simple curried function that adds two numbers, invoked as add(2)(3)?", options: ["const add = a => b => a + b", "const add = (a, b) => a + b", "const add = a => { a + b }", "const add = a => b => { return a }"], ans: 0, explanation: "add(2) returns an inner function that takes b, which when invoked as add(2)(3) adds both variables, leveraging closures." },
+      { q: "In ES Modules (ESM), which statement is used to import named exports from another file?", options: ["const { x } = require('module')", "import { x } from './module.js'", "load './module.js'", "require.import('./module.js')"], ans: 1, explanation: "ES Modules use the 'import { names } from' keyword for named bindings, whereas CommonJS uses require()." },
+      { q: "In destructuring, how do you assign a property userName to a local variable named name?", options: ["const { userName = name } = obj", "const { userName: name } = obj", "const { userName as name } = obj", "const { name: userName } = obj"], ans: 1, explanation: "The syntax { property: alias } renames the destructured property userName to a local variable named name." }
+    ],
+    20: [
+      { q: "Which array method executes a user-provided reducer callback on each element, resulting in a single output value?", options: ["map", "filter", "reduce", "forEach"], ans: 2, explanation: "reduce iterates through the array and carries an accumulator value forward, condensing the array into a single result." },
+      { q: "For a list of promises, if you want them to run in parallel and obtain results only when all of them complete successfully, which API is preferred?", options: ["Promise.all", "Promise.race", "Promise.any", "Promise.allSettled"], ans: 0, explanation: "Promise.all runs promises in parallel and resolves once all are successful, but rejects immediately if any single promise fails." },
+      { q: "What is a highly performant ES6 way to remove duplicate elements from an array?", options: [" [...new Set(arr)]", "arr.filter() inside a duplicate checker loop", "arr.sort() and slice()", "JSON.stringify(arr)"], ans: 0, explanation: "Set only stores unique elements. Spreading the Set back into an array [...new Set(arr)] gives a list of unique items in O(N) time." }
+    ],
+    21: [
+      { q: "Which function checks if a value is strictly NaN without the type coercion bugs of the global isNaN?", options: ["isNaN(x)", "Number.isNaN(x)", "typeof x === 'nan'", "x.isNaN()"], ans: 1, explanation: "Number.isNaN(x) does not perform type coercion, verifying if the value is of type Number and holds the literal value NaN." },
+      { q: "What is the key advantage of WeakMap over Map in JavaScript?", options: ["Keys are strings instead of objects", "WeakMap keys are weakly referenced, allowing objects to be garbage collected when no longer accessible elsewhere", "WeakMap is always faster for lookups", "WeakMap supports keys of primitive types"], ans: 1, explanation: "WeakMap maintains weak references to key objects. If there are no other references to a key object, the garbage collector can recycle it safely." },
+      { q: "What can be passed as an argument in JavaScript constructor functions to assign properties to the new instance?", options: ["Use the `this` keyword inside the constructor", "Use the `parent` keyword", "Assign directly to local window", "Return a new object from scratch"], ans: 0, explanation: "Inside a constructor function, 'this' refers to the newly created object. Setting properties on 'this' pre-populates the object instance." }
+    ],
+    22: [
+      { q: "What does JSX compile down into under the hood?", options: ["Static HTML strings", "React.createElement calls (or _jsx runtime equivalent)", "jQuery selectors", "Browser Web Components"], ans: 1, explanation: "JSX is syntactic sugar. Visual tags are compiled into nested React.createElement() blocks that describe the Virtual DOM layout." },
+      { q: "Why should we NOT use array indices as the 'key' prop in dynamic lists?", options: ["Because React keys must be integers only", "It can cause visual glitches and state bugs when list items are reordered, inserted, or deleted", "It takes twice as long to reconcile", "React throws a compilation error"], ans: 1, explanation: "Using array indices as keys disrupts React's reconciliation diffing when list order changes, causing component state mismatches." },
+      { q: "What is the fundamental difference between state and props in React?", options: ["State is passed into the component, props are managed within", "Props are read-only and passed to the component; state is mutable and managed internally by the component", "Props trigger re-renders, but state does not", "There is no difference"], ans: 1, explanation: "Props are external parameters passed down by the parent. State is local interactive data owned and maintained in the component itself." }
+    ],
+    23: [
+      { q: "When using useRef, which property of the returned object holds the mutable value?", options: ["value", "current", "ref", "state"], ans: 1, explanation: "useRef returns a ref object with a mutable 'current' property initialized to the passed argument." },
+      { q: "What is the main difference between execution timings of useEffect and useLayoutEffect?", options: ["useLayoutEffect runs asynchronously, useEffect runs synchronously", "useEffect fires after browser paint; useLayoutEffect fires synchronously before browser paint", "useEffect is only for class components", "useLayoutEffect can only fetch data"], ans: 1, explanation: "useLayoutEffect runs synchronously immediately after DOM mutations but before the browser paints the screen, preventing flashing." },
+      { q: "Which hook should you use to cache the return value of an expensive calculation across renders?", options: ["useCallback", "useMemo", "useRef", "useReducer"], ans: 1, explanation: "useMemo memoizes the computed value, only recalculating it when its dependencies change, saving CPU cycles." }
+    ],
+    24: [
+      { q: "Which of the following describes a strict 'Rule of Hooks' in React?", options: ["Only call hooks at the top level of components (not inside loops or conditions)", "Hooks can be called anywhere inside standard JS helper functions", "Always import hooks from lodash", "Only use hooks inside class component lifecycle rules"], ans: 0, explanation: "Hooks rely on stable call orders. Inside loops or conditionals, the execution order changes, breaking React's hook call tracking." },
+      { q: "What React component/method is used to catch JavaScript errors in its child tree and display a fallback UI?", options: ["try/catch block inside render()", "Error Boundary (components implementing getDerivedStateFromError or componentDidCatch)", "useEffect error catch callbacks", "window.onerror"], ans: 1, explanation: "Error Boundaries are React Class Components that implement specific lifecycle methods to intercept subtree rendering crashes." },
+      { q: "What is 'hydration' in the context of React server-side rendering (SSR)?", options: ["Adding more hydration packages to npm", "The process of attaching event listeners to static HTML sent from the server to make it fully interactive", "Deleting cached virtual DOM elements to save memory", "Converting client-only APIs back into node APIs"], ans: 1, explanation: "Hydration matches the client-rendered Virtual DOM with the server-rendered HTML markup and attaches event handlers without needing a full re-paint." }
+    ],
+    25: [
+      { q: "In Redux Toolkit, what utility creates both the action creators and the reducer automatically?", options: ["createAction", "createSlice", "createStore", "configureStore"], ans: 1, explanation: "createSlice accepts an initial state and a map of reducers, automatically generating corresponding action creators and reducer logic." },
+      { q: "What design pattern allows components to share implicit state and work together, like <Tabs><TabList/><TabPanels/></Tabs>?", options: ["Render props", "Compound components", "Higher-Order Components", "Presentational component grouping"], ans: 1, explanation: "Compound components share implicit context state (e.g., active Tab index), managing a coherent visual group cleanly." },
+      { q: "Why must reducers in Redux/useReducer be pure functions?", options: ["To allow direct mutation of current state", "To make asynchronous API calls safely", "To ensure predictable state changes and enable accurate change detection/time-travel debugging", "Because JavaScript blocks impure functions in stores"], ans: 2, explanation: "Pure functions return a brand new state object rather than mutating the parameter, allowing shallow object comparison to detect changes." }
+    ],
+    26: [
+      { q: "To prevent parent re-renders from triggering re-rendering of a child component that receives pure props, which technique/HOC is used?", options: ["React.memo", "useMemo", "useCallback", "lazy()"], ans: 0, explanation: "React.memo is a higher-order component that performs a shallow comparison of props, skipping re-renders if props are identical." },
+      { q: "Which React testing library is officially recommended for testing components in a way that resembles user-facing behaviour?", options: ["Enzyme", "React Testing Library", "Selenium", "Mocha"], ans: 1, explanation: "React Testing Library queries elements by text content, labels, and roles, ensuring tests are highly isolated from implementation details." },
+      { q: "What is the primary role of ARIA attributes (e.g., aria-label) in web applications?", options: ["Styling elements in css", "Improving accessibility (a11y) for screen-readers and assistive technologies", "Executing client-side model logic", "Binding data keys to state indices"], ans: 1, explanation: "ARIA attributes describe semantics and roles of interactive widgets, making complex layouts fully traversable by assistive devices." }
+    ],
+    27: [
+      { q: "What is the main benefit of React Server Components (RSC) compared to client components?", options: ["They run on the client-side only", "They can direct-query database services, reduce bundles sent to the client, and load metadata on the server", "They replace the virtual DOM client-side completely", "They don't support JSX syntax"], ans: 1, explanation: "Server Components execute solely on the server, avoiding any package bundle impact for those components on the client-side." },
+      { q: "Which hook is used to mark a state update as a non-blocking transition, keeping the UI fully responsive?", options: ["useDeferredValue", "useTransition", "useEffect", "useReducer"], ans: 1, explanation: "useTransition yields a startTransition function to mark slow state updates (e.g., list filters) as low priority, preventing UI blocking." },
+      { q: "How do you implement dynamic localization/internationalization in a modern React application?", options: ["By hardcoding a single language file", "By using a Context provider paired with i18n libraries like react-i18next", "By rewriting the app into separate repositories per language", "By using the window.locale API exclusively"], ans: 1, explanation: "A Context-based localization provider distributes current translations down the tree, allowing components to re-render in the new language seamlessly." }
+    ],
+    28: [
+      { q: "What is the fundamental goal of database sharding?", options: ["Replicating database transactions into standard CDNs", "Horizontal partitioning of data across multiple database instances to scale load and storage", "Converting SQL datasets into key-value cache blocks", "Encrypting passwords stored in columns"], ans: 1, explanation: "Sharding splits rows of a database table across distinct server instances based on a shard key, enabling horizontal scalability." },
+      { q: "What does 'Eventual Consistency' in distributed databases guarantee?", options: ["The system is never consistent", "All read requests return identical data instantly", "If no new updates are made, all replicas will eventually sync and converge to the same value", "Consistency is checked only during system crashes"], ans: 2, explanation: "In eventually consistent systems, write propagation is asynchronous, meaning data converges to a uniform state after a brief delay." },
+      { q: "Which CAP theorem component is sacrificed when prioritising high availability during a network partition?", options: ["Consistency", "Availability", "Partition Tolerance", "Latency"], ans: 0, explanation: "If nodes cannot communicate (partition) and you choose to maintain availability (always respond to clients), you must sacrifice consistency (nodes may return stale data)." }
+    ],
+    29: [
+      { q: "How does the hierarchical CLAUDE.md structure help Claude Code inside large repos?", options: ["It contains encrypted API keys", "It stores instructions, coding conventions, and project standards at root and folder-level scopes that are read automatically", "It compiles TypeScript code to Node", "It acts as a package manager"], ans: 1, explanation: "CLAUDE.md files are read hierarchically, allowing both root instructions and specialized folder-specific directions to be injected contextually." },
+      { q: "What does the -p command flag enable when calling the claude CLI?", options: ["Specifies a custom port number", "Runs in non-interactive (headless) mode to execute a prompt and exit immediately", "Increases model token priority", "Encrypts all files in current scope"], ans: 1, explanation: "Headless mode via -p executes a command/prompt string and returns output, making it extremely useful for shell scripts and CI/CD pipelines." },
+      { q: "Where are tool execution settings and permissions configured for Claude Code on a per-repository basis?", options: ["package.json", ".claude/settings.json", "CLAUDE.md", "node_modules/.bin/claude"], ans: 1, explanation: "The .claude/settings.json file houses repo-level tool settings and script behaviors, distributing standard permissions securely among developers." }
+    ],
+    30: [
+      { q: "An interview problem has input size N <= 10^5. Which maximum Big-O time complexity is generally safe to avoid a TLE (Time Limit Exceeded) error?", options: ["O(N²)", "O(N log N) or O(N)", "O(2^N)", "O(N³)"], ans: 1, explanation: "An input of 10^5 operations starts timing out at O(N²) (10^10 ops), requiring O(N log N) or better to run within the standard 1-2 second threshold." },
+      { q: "Which architectural design pattern allows a frontend client to pause resource poll loops safely when a backend is down?", options: ["Circuit breaker pattern on APIs", "Infinite while loops client-side", "Database locking", "Subagent nesting"], ans: 0, explanation: "Circuit breakers intercept calls to a failing backend, preventing cascade failures and saving network requests." },
+      { q: "To best consolidate your weak areas right before an interview, what is the most effective approach?", options: ["Skip mock exams completely", "Identify modules with low test scores, review their subtopics, and re-solve missed dynamic mock tests", "Start memorising solutions to completely new hard problems", "Rewrite the entire frontend framework"], ans: 1, explanation: "Targeting modules with low percentages, examining their clear syllabus items, and retraining via correct mock testing optimizes prep efficiency." }
+    ]
   };
 
   /* ─────────────────────────────────────────────
      STORAGE
   ───────────────────────────────────────────── */
-  const LS_START    = 'interviewPlaybook_startDate';
+  const LS_STARTED  = 'interviewPlaybook_started';
   const LS_PROGRESS = 'interviewPlaybook_progress';
   const LS_SCORES   = 'interviewPlaybook_testScores';
 
   function loadProgress() {
-    try { return JSON.parse(localStorage.getItem(LS_PROGRESS) || '{}'); } catch(e) { return {}; }
+    try {
+      const stored = localStorage.getItem(LS_PROGRESS);
+      if (!stored) return {};
+      const parsed = JSON.parse(stored);
+      if (parsed && typeof parsed === 'object') {
+        return parsed;
+      }
+      return {};
+    } catch(e) {
+      return {};
+    }
   }
   function saveProgress(p) { localStorage.setItem(LS_PROGRESS, JSON.stringify(p)); }
   function loadScores() {
-    try { return JSON.parse(localStorage.getItem(LS_SCORES) || '{}'); } catch(e) { return {}; }
+    try {
+      const stored = localStorage.getItem(LS_SCORES);
+      if (!stored) return {};
+      const parsed = JSON.parse(stored);
+      if (parsed && typeof parsed === 'object') {
+        return parsed;
+      }
+      return {};
+    } catch(e) {
+      return {};
+    }
   }
   function saveScores(s) { localStorage.setItem(LS_SCORES, JSON.stringify(s)); }
-  function getStartDate() { return localStorage.getItem(LS_START) || null; }
-  function setStartDate(d) { localStorage.setItem(LS_START, d); }
+  function hasStarted() { return localStorage.getItem(LS_STARTED) === '1'; }
+  function markStarted() { localStorage.setItem(LS_STARTED, '1'); }
 
   /* ─────────────────────────────────────────────
-     DATE HELPERS
+     HELPERS
   ───────────────────────────────────────────── */
-  function toYMD(d) {
-    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  function getHighestUnlocked(progress) {
+    let highest = 1;
+    for (let i = 1; i <= 30; i++) {
+      if (progress[i]) {
+        highest = Math.min(i + 1, 30);
+      }
+    }
+    return highest;
   }
-  function fromYMD(s) {
-    const [y,m,d] = s.split('-').map(Number);
-    return new Date(y, m-1, d);
+
+  function isUnlocked(dayNum, progress) {
+    if (dayNum === 1) return true;
+    return !!progress[dayNum - 1];
   }
-  function addDays(d, n) {
-    const r = new Date(d); r.setDate(r.getDate() + n); return r;
+
+  function isDone(dayNum, progress) {
+    return !!progress[dayNum];
   }
-  function isWeekend(d) { return d.getDay() === 0 || d.getDay() === 6; }
-  function formatDate(d) {
-    return d.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+
+  function getQCount(dayNum) {
+    return (QUESTIONS[dayNum] || []).length;
   }
-  function todayYMD() { return toYMD(new Date()); }
+
+  function getDoneCount(progress) {
+    return Object.keys(progress).filter(k => progress[k]).length;
+  }
 
   /* ─────────────────────────────────────────────
      INIT
@@ -1467,37 +1639,41 @@
   const elProgressW = document.getElementById('planProgressWrap');
   const elCalendar  = document.getElementById('planCalendar');
   const elDetail    = document.getElementById('planDetailPanel');
-  const elPill      = document.getElementById('todayPill');
+  const elPaceHint  = document.getElementById('paceHint');
+  const elPaceText  = document.getElementById('paceHintText');
 
   let selectedDay = null;
 
   function init() {
-    const today = new Date();
-    if (elPill) elPill.textContent = today.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
-
-    const start = getStartDate();
-    if (!start) {
+    if (!hasStarted()) {
       elPrompt.style.display = 'flex';
+      elCalendar.style.display = 'none';
+      elProgressW.style.display = 'none';
+      elPaceHint.style.display = 'none';
     } else {
       elPrompt.style.display = 'none';
-      renderCalendar(start);
+      renderCalendar();
     }
   }
 
   window.planBegin = function() {
-    const today = todayYMD();
-    setStartDate(today);
+    markStarted();
     elPrompt.style.display = 'none';
-    renderCalendar(today);
+    renderCalendar();
+    // Auto-open module 1 safely
+    setTimeout(() => {
+      window.openDetail(1);
+    }, 100);
   };
 
   window.planReset = function() {
     if (!confirm('Reset all progress? This cannot be undone.')) return;
-    localStorage.removeItem(LS_START);
+    localStorage.removeItem(LS_STARTED);
     localStorage.removeItem(LS_PROGRESS);
     localStorage.removeItem(LS_SCORES);
     elCalendar.style.display = 'none';
     elProgressW.style.display = 'none';
+    elPaceHint.style.display = 'none';
     elDetail.classList.remove('visible');
     selectedDay = null;
     elPrompt.style.display = 'flex';
@@ -1506,94 +1682,104 @@
   /* ─────────────────────────────────────────────
      RENDER CALENDAR
   ───────────────────────────────────────────── */
-  function renderCalendar(startYMD) {
+  function renderCalendar() {
     const progress = loadProgress();
     const scores   = loadScores();
-    const startD   = fromYMD(startYMD);
-    const todayStr = todayYMD();
+    const highestUnlocked = getHighestUnlocked(progress);
 
     elCalendar.innerHTML = '';
     elCalendar.style.display = 'grid';
     elProgressW.style.display = 'flex';
+    elPaceHint.style.display = 'flex';
 
-    let doneCount = 0;
+    const doneCount = getDoneCount(progress);
+
+    // Update pace hint text
+    const remaining = 30 - doneCount;
+    if (doneCount === 0) {
+      elPaceText.innerHTML = 'Complete <strong>Module 1</strong> to unlock the next one. Go at your own pace — do as many as you like in a day.';
+    } else if (doneCount === 30) {
+      elPaceText.innerHTML = '🎉 <strong>All 30 modules complete!</strong> You\'re interview-ready. Use mock tests to keep sharp.';
+    } else {
+      elPaceText.innerHTML = `<strong>${doneCount} of 30 modules done.</strong> ${remaining} to go — you can complete multiple modules in one sitting.`;
+    }
 
     for (let i = 0; i < 30; i++) {
       const dayNum  = i + 1;
-      const dayDate = addDays(startD, i);
-      const dayStr  = toYMD(dayDate);
       const data    = DAYS[i];
       const topic   = TOPICS[data.topic];
-      const done    = !!progress[dayNum];
-      const isToday = dayStr === todayStr;
-      const isFuture= dayStr > todayStr;
-      const isMissed= !done && dayStr < todayStr;
-      const weekend  = isWeekend(dayDate);
-      const score    = scores[dayNum];
-
-      if (done) doneCount++;
+      const done    = isDone(dayNum, progress);
+      const unlocked = isUnlocked(dayNum, progress);
+      const isNext  = dayNum === highestUnlocked && !done;
+      const score   = scores[dayNum];
 
       const cell = document.createElement('div');
-      cell.className = 'day-cell' +
-        (done    ? ' day-done'   : '') +
-        (isToday ? ' day-today'  : '') +
-        (isFuture? ' day-future' : '') +
-        (isMissed? ' day-missed' : '') +
-        (weekend  ? ' day-weekend': '') +
-        (selectedDay === dayNum ? ' day-selected' : '');
+      let cellClass = 'day-cell';
+      if (done)            cellClass += ' day-done';
+      else if (!unlocked)  cellClass += ' day-locked';
+      else if (isNext)     cellClass += ' day-unlocked-next';
+      if (selectedDay === dayNum) cellClass += ' day-selected';
+
+      cell.className = cellClass;
       cell.style.setProperty('--cell-color', topic.color);
       cell.dataset.day = dayNum;
 
+      let badgeHTML = '';
+      if (done) {
+        badgeHTML = ''; // tick icon handles it
+      } else if (isNext) {
+        badgeHTML = `<span class="cell-status-badge badge-next">UP NEXT</span>`;
+      } else if (!unlocked) {
+        badgeHTML = `<span class="cell-status-badge badge-locked">LOCKED</span>`;
+      }
+
       cell.innerHTML = `
         <div class="cell-top">
-          <span class="cell-day-num">Day ${dayNum}</span>
-          ${isToday ? '<span class="cell-today-badge">TODAY</span>' : `<span class="cell-date">${formatDate(dayDate)}</span>`}
+          <span class="cell-day-num">Module ${dayNum}</span>
+          ${badgeHTML}
         </div>
-        ${weekend ? '<span class="cell-weekend-badge">⚡ Weekend</span>' : ''}
         <span class="cell-topic-tag">${topic.icon} ${topic.label}</span>
         <span class="cell-task">${data.task}</span>
-        ${score !== undefined ? `<span class="cell-score-badge">Test: ${score}/${getQCount(data.topic)}</span>` : ''}
-        ${done    ? '<span class="cell-tick">✓</span>'   : ''}
-        ${isMissed? '<span class="cell-missed-icon">!</span>' : ''}
+        ${score !== undefined ? `<span class="cell-score-badge">Test: ${score}/${getQCount(dayNum)}</span>` : ''}
+        ${done ? '<span class="cell-tick">✓</span>' : ''}
+        ${!unlocked ? '<span class="cell-lock-icon">🔒</span>' : ''}
       `;
 
-      if (!isFuture) {
-        cell.addEventListener('click', () => openDetail(dayNum, startYMD));
+      if (unlocked || done) {
+        cell.addEventListener('click', () => {
+          window.openDetail(dayNum);
+        });
       }
 
       elCalendar.appendChild(cell);
     }
 
-    updateProgress(doneCount, startYMD);
+    updateProgress(doneCount);
   }
 
-  function getQCount(topicKey) {
-    if (topicKey === 'rev') return QUESTIONS.rev.length;
-    return (QUESTIONS[topicKey] || []).length;
-  }
-
-  function updateProgress(doneCount, startYMD) {
+  function updateProgress(doneCount) {
     const pct = Math.round((doneCount / 30) * 100);
-    document.getElementById('planProgressBar').style.width = pct + '%';
-    const finishDate = addDays(fromYMD(startYMD), 29);
-    document.getElementById('planProgressText').innerHTML =
-      `<strong>${doneCount}</strong> / 30 days completed · Est. finish: ${formatDate(finishDate)}`;
+    const progressBar = document.getElementById('planProgressBar');
+    if (progressBar) progressBar.style.width = pct + '%';
+    const progressText = document.getElementById('planProgressText');
+    if (progressText) {
+      progressText.innerHTML = `<strong>${doneCount}</strong> / 30 modules completed &nbsp;·&nbsp; ${pct}% done`;
+    }
   }
 
   /* ─────────────────────────────────────────────
-     DETAIL PANEL
+     DETAIL PANEL (GLOBALLY EXPOSED)
   ───────────────────────────────────────────── */
-  function openDetail(dayNum, startYMD) {
+  window.openDetail = function(dayNum) {
     selectedDay = dayNum;
     const data     = DAYS[dayNum - 1];
     const topic    = TOPICS[data.topic];
     const progress = loadProgress();
     const scores   = loadScores();
-    const done     = !!progress[dayNum];
+    const done     = isDone(dayNum, progress);
     const score    = scores[dayNum];
-    const dayDate  = formatDate(addDays(fromYMD(startYMD), dayNum - 1));
-    const qCount   = getQCount(data.topic);
-    const questions= QUESTIONS[data.topic] || [];
+    const qCount   = getQCount(dayNum);
+    const questions= QUESTIONS[dayNum] || [];
 
     elDetail.style.setProperty('--detail-color', topic.color);
 
@@ -1606,35 +1792,54 @@
     const mockDisabled  = !done || questions.length === 0;
     const scoreText     = score !== undefined ? `<span class="mock-score-display">Last score: ${score}/${qCount}</span>` : '';
 
+    // Next module nudge
+    let nextNudgeHTML = '';
+    if (done && dayNum < 30) {
+      const nextData  = DAYS[dayNum];
+      const nextTopic = TOPICS[nextData.topic];
+      nextNudgeHTML = `
+        <div class="next-day-nudge">
+          <span>✅ Module ${dayNum} complete! <strong>Module ${dayNum + 1}</strong> is now unlocked: ${nextTopic.icon} ${nextData.task}</span>
+          <button class="btn-go-next" onclick="openDetail(${dayNum + 1})">Go →</button>
+        </div>
+      `;
+    } else if (done && dayNum === 30) {
+      nextNudgeHTML = `
+        <div class="next-day-nudge" style="--detail-color:#fbbf24">
+          <span>🎉 <strong>All 30 modules complete!</strong> You've finished the full prep journey. Go ace that interview!</span>
+        </div>
+      `;
+    }
+
     elDetail.innerHTML = `
       <div class="detail-top">
         <div class="detail-title-block">
-          <div class="detail-eyebrow">${topic.icon} ${topic.label} · Day ${dayNum}</div>
+          <div class="detail-eyebrow">${topic.icon} ${topic.label} · Module ${dayNum} of 30</div>
           <div class="detail-title">${data.task}</div>
           <div class="detail-meta">
-            <span>📅 ${dayDate}</span>
-            <span>⏱ ${data.time}</span>
-            ${isWeekend(addDays(fromYMD(startYMD), dayNum - 1)) ? '<span>⚡ Weekend session</span>' : ''}
+            <span>⏱ Est. time: ${data.time}</span>
+            ${done ? `<span style="color:var(--detail-color)">✓ Completed</span>` : '<span>Not yet completed</span>'}
           </div>
         </div>
       </div>
       <div class="detail-subtopics">
-        <h4>What to cover today</h4>
+        <h4>What to cover in this module</h4>
         <ul>${subtopicItems}</ul>
       </div>
       <div class="detail-actions">
         <button class="btn-complete ${done ? 'mark-undo' : 'mark-done'}"
-          onclick="toggleComplete(${dayNum}, '${startYMD}')"
+          onclick="toggleComplete(${dayNum})"
           style="${done ? '' : `background:${topic.color};`}">
-          ${done ? '↩ Mark Incomplete' : '✓ Mark Complete'}
+          ${done ? '↩ Mark Incomplete' : '✓ Mark Complete & Unlock Next'}
         </button>
         ${resourceLink}
         ${scoreText}
         <button class="btn-mock" ${mockDisabled ? 'disabled' : ''} onclick="openMock(${dayNum})"
-          title="${mockDisabled ? 'Mark this day complete first' : 'Take mock test'}">
+          title="${mockDisabled ? 'Mark this module complete first' : 'Take mock test'}">
           🧪 ${score !== undefined ? 'Retake' : 'Take'} Mock Test ${mockDisabled ? '🔒' : ''}
         </button>
       </div>
+      ${nextNudgeHTML}
     `;
 
     elDetail.classList.add('visible');
@@ -1644,15 +1849,26 @@
     document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('day-selected'));
     const cellEl = document.querySelector(`.day-cell[data-day="${dayNum}"]`);
     if (cellEl) cellEl.classList.add('day-selected');
-  }
+  };
 
-  window.toggleComplete = function(dayNum, startYMD) {
+  window.toggleComplete = function(dayNum) {
     const progress = loadProgress();
-    if (progress[dayNum]) { delete progress[dayNum]; }
-    else { progress[dayNum] = true; }
+    if (progress[dayNum]) {
+      delete progress[dayNum];
+    } else {
+      progress[dayNum] = true;
+    }
     saveProgress(progress);
-    renderCalendar(startYMD);
-    openDetail(dayNum, startYMD);
+    renderCalendar();
+    window.openDetail(dayNum);
+
+    // If just completed and not the last, scroll to show next module is unlocked
+    if (progress[dayNum] && dayNum < 30) {
+      setTimeout(() => {
+        const nextCell = document.querySelector(`.day-cell[data-day="${dayNum + 1}"]`);
+        if (nextCell) nextCell.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 300);
+    }
   };
 
   /* ─────────────────────────────────────────────
@@ -1663,8 +1879,7 @@
   window.openMock = function(dayNum) {
     const data      = DAYS[dayNum - 1];
     const topicKey  = data.topic;
-    const qs        = (QUESTIONS[topicKey] || []).slice();
-    // Shuffle
+    const qs        = (QUESTIONS[dayNum] || []).slice();
     for (let i = qs.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [qs[i], qs[j]] = [qs[j], qs[i]];
@@ -1680,17 +1895,11 @@
     const modal = document.getElementById('mockModal');
 
     if (current >= total) {
-      // Save score
       const scores = loadScores();
       scores[mockState.dayNum] = score;
       saveScores(scores);
-      // Re-render calendar + detail
-      const startYMD = getStartDate();
-      if (startYMD) {
-        renderCalendar(startYMD);
-        openDetail(mockState.dayNum, startYMD);
-      }
-      // Show summary
+      renderCalendar();
+      window.openDetail(mockState.dayNum);
       const pct = Math.round((score / total) * 100);
       let verdict, verdictColor;
       if      (pct >= 80) { verdict = '🏆 Excellent!';   verdictColor = '#34d399'; }
@@ -1707,7 +1916,7 @@
           <div class="score-big" style="color:${verdictColor}">${score}<span style="font-size:1.5rem;color:var(--text-muted)">/${total}</span></div>
           <div class="score-label">${pct}% correct</div>
           <div class="score-verdict" style="color:${verdictColor}; border-color:${verdictColor}; background:${verdictColor}22">${verdict}</div>
-          <p style="font-size:0.85rem;color:var(--text-muted);max-width:320px;text-align:center;">Score saved. You can retake anytime from the day's detail panel.</p>
+          <p style="font-size:0.85rem;color:var(--text-muted);max-width:320px;text-align:center;">Score saved. You can retake anytime from the module's detail panel.</p>
           <button class="btn-close-score" onclick="closeMock()">Close</button>
         </div>
       `;
@@ -1779,7 +1988,6 @@
     document.getElementById('mockOverlay').classList.remove('open');
   };
 
-  // Close on backdrop click
   document.getElementById('mockOverlay').addEventListener('click', function(e) {
     if (e.target === this) closeMock();
   });
@@ -1793,8 +2001,7 @@
 <section class="creator-section" id="creator">
   <div class="creator-card">
     <div class="creator-avatar">
-      <!-- Replace src with your actual photo URL or local path -->
-      <img src="img/profile.png" alt="Creator photo" onerror="this.parentElement.innerHTML='👤'" />
+      👤
     </div>
     <span class="creator-badge">Creator</span>
     <div class="creator-name">Akash Pandey</div>
@@ -1803,14 +2010,14 @@
       Built this playbook to make interview prep less chaotic and more structured. Good luck out there! 🚀
     </p>
     <a class="linkedin-btn" href="https://www.linkedin.com/in/akash-pandey-787aa5a2/" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 11 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       Connect on LinkedIn
     </a>
   </div>
 </section>
 
 <footer>
-  <p>Built with ❤️ by <strong style="color:var(--text)">Akash Pandey</strong> · InterviewPlaybook 2025</p>
+  <p>Built with ❤️ by <strong style="color:var(--text)">Akash Pandey</strong> · InterviewPlaybook 2026</p>
 </footer>
 
 </body>
